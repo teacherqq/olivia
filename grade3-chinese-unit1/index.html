@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='18' fill='%23dc2626'/><path d='M50 18 L50 82 M18 50 L82 50' stroke='%23fff' stroke-width='6' stroke-dasharray='10 8'/><text x='50' y='66' font-size='48' text-anchor='middle' fill='%23fff' font-family='serif' font-weight='bold'>田</text></svg>">
+<title>單元一 學習重點 · 三年級中文</title>
+<style>
+  :root{
+    --ink:#1e293b; --ink2:#475569; --paper:#f4f7fb; --card:#ffffff;
+    --l1:#e11d48; --l2:#0d9488; --l3:#7c3aed; --l4:#d97706;
+    --l1-bg:#fff1f2; --l2-bg:#f0fdfa; --l3-bg:#f5f3ff; --l4-bg:#fffbeb;
+    --ok:#16a34a; --ok-bg:#dcfce7; --bad:#dc2626; --bad-bg:#fee2e2;
+    --tile:124px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:"Kaiti TC","Kaiti SC","STKaiti","BiauKai","DFKai-SB","KaiTi","楷體","標楷體","PingFang TC","Microsoft JhengHei",serif;
+    background:var(--paper); color:var(--ink); line-height:1.6;
+  }
+  /* ---------- NAV ---------- */
+  nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.95);backdrop-filter:blur(8px);border-bottom:2px solid #e2e8f0}
+  .nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:16px;padding:10px 20px;flex-wrap:wrap}
+  .logo{font-size:1.35rem;font-weight:800;white-space:nowrap}
+  .logo .b1{color:var(--l1)} .logo .b2{color:var(--l2)}
+  .nav-links{display:flex;gap:6px;flex-wrap:wrap;margin-left:auto}
+  .nav-links a{display:block;padding:7px 14px;border-radius:999px;text-decoration:none;color:var(--ink2);font-weight:600;font-size:.95rem;transition:.15s}
+  .nav-links a:hover{background:#eef2f7;color:var(--ink)}
+  /* ---------- HERO ---------- */
+  .hero{max-width:1100px;margin:26px auto 10px;padding:0 20px}
+  .hero-card{background:linear-gradient(135deg,#fff 60%,#fdf2f8);border:2px solid #fbcfe8;border-radius:24px;padding:30px 34px}
+  .hero h1{font-size:clamp(1.8rem,4vw,2.6rem);font-weight:900;letter-spacing:.05em}
+  .hero h1 small{display:block;font-size:1rem;font-weight:600;color:var(--ink2);letter-spacing:.12em;margin-top:6px}
+  .lesson-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin-top:22px}
+  .lesson-card{border-radius:16px;padding:16px 18px;border:2px solid;cursor:pointer;transition:transform .15s}
+  .lesson-card:hover{transform:translateY(-3px)}
+  .lesson-card .no{font-size:.85rem;font-weight:700;opacity:.75}
+  .lesson-card .tt{font-size:1.25rem;font-weight:800;margin:2px 0 6px}
+  .lesson-card .ct{font-size:.88rem;color:var(--ink2)}
+  .lc1{background:var(--l1-bg);border-color:#fecdd3} .lc1 .tt{color:var(--l1)}
+  .lc2{background:var(--l2-bg);border-color:#99f6e4} .lc2 .tt{color:var(--l2)}
+  .lc3{background:var(--l3-bg);border-color:#ddd6fe} .lc3 .tt{color:var(--l3)}
+  .lc4{background:var(--l4-bg);border-color:#fde68a} .lc4 .tt{color:var(--l4)}
+  /* ---------- SECTIONS ---------- */
+  section{max-width:1100px;margin:38px auto;padding:0 20px}
+  .sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:6px;flex-wrap:wrap}
+  .sec-head h2{font-size:1.75rem;font-weight:900}
+  .sec-head .en{color:#94a3b8;font-weight:600}
+  .sec-desc{color:var(--ink2);margin-bottom:18px}
+  .lesson-block{border:2px solid #e2e8f0;border-radius:20px;padding:20px 22px;margin-bottom:20px;background:var(--card)}
+  .lesson-block.l1{border-top:6px solid var(--l1)} .lesson-block.l2{border-top:6px solid var(--l2)}
+  .lesson-block.l3{border-top:6px solid var(--l3)} .lesson-block.l4{border-top:6px solid var(--l4)}
+  .lb-title{font-size:1.2rem;font-weight:800;margin-bottom:14px}
+  .lb-title .chip{display:inline-block;font-size:.8rem;color:#fff;border-radius:999px;padding:2px 12px;margin-left:8px;vertical-align:middle}
+  .l1 .lb-title .chip{background:var(--l1)} .l2 .lb-title .chip{background:var(--l2)}
+  .l3 .lb-title .chip{background:var(--l3)} .l4 .lb-title .chip{background:var(--l4)}
+  /* read words */
+  .word-grid{display:flex;flex-wrap:wrap;gap:12px}
+  .rw-card{background:#fff;border:2px solid #e2e8f0;border-radius:14px;padding:12px 18px;display:flex;align-items:center;gap:10px;cursor:pointer;transition:.15s;user-select:none}
+  .rw-card:hover{border-color:#94a3b8;transform:translateY(-2px)}
+  .rw-card .w{font-size:1.7rem;font-weight:700}
+  .rw-card .mid{display:flex;flex-direction:column;line-height:1.35}
+  .rw-card .py{font-size:.85rem;color:var(--ink2)}
+  .en-gloss{font-size:.75rem;color:#94a3b8;font-weight:600;letter-spacing:.02em}
+  .rw-card .sp{font-size:1.2rem;opacity:.55}
+  .rw-card.speaking{border-color:var(--l2);background:var(--l2-bg)}
+  /* write words */
+  .write-grid{display:flex;flex-wrap:wrap;gap:26px 34px}
+  .word-block{display:flex;flex-direction:column;gap:8px}
+  .word-block .top{display:flex;align-items:center;gap:8px}
+  .word-block .py{font-size:.95rem;color:var(--ink2);font-weight:600}
+  .word-block .sp{font-size:1rem;background:none;border:none;cursor:pointer;opacity:.55}
+  .char-row{display:flex;flex-wrap:wrap;gap:14px}
+  .char-tile{display:flex;align-items:center;gap:8px}
+  .tzg{position:relative;width:var(--tile);height:var(--tile);background:#fff;border:3px solid #334155;border-radius:10px;flex:none}
+  .tzg .grid{position:absolute;inset:0;pointer-events:none}
+  .tzg .grid::before{content:"";position:absolute;left:50%;top:2px;bottom:2px;border-left:2px dashed #f59e0b;opacity:.65}
+  .tzg .grid::after{content:"";position:absolute;top:50%;left:2px;right:2px;border-top:2px dashed #f59e0b;opacity:.65}
+  .tzg .hw{position:absolute;inset:0;cursor:pointer}
+  .tzg .fallback{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:calc(var(--tile)*.62);font-weight:700}
+  .stroke-btn{width:40px;height:40px;border-radius:50%;border:none;color:#fff;font-size:1.05rem;font-weight:800;cursor:pointer;flex:none;box-shadow:0 2px 6px rgba(0,0,0,.18);transition:transform .12s}
+  .stroke-btn:hover{transform:scale(1.12)}
+  .stroke-btn:active{transform:scale(.95)}
+  .t1 .stroke-btn{background:var(--l1)} .t2 .stroke-btn{background:var(--l2)}
+  .t3 .stroke-btn{background:var(--l3)} .t4 .stroke-btn{background:var(--l4)}
+  .stroke-btn small{display:block;font-size:.5rem;font-weight:600}
+  /* knowledge */
+  .kn-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px}
+  .kn-card{background:var(--card);border:2px solid #e2e8f0;border-radius:18px;padding:20px 22px}
+  .kn-card h3{font-size:1.1rem;font-weight:800;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+  .kn-card h3 .tag{font-size:.72rem;color:#fff;background:#64748b;border-radius:999px;padding:2px 10px;font-weight:600}
+  .fx-row{display:flex;align-items:center;gap:16px;padding:12px 4px;border-bottom:1px dashed #e2e8f0;flex-wrap:wrap}
+  .fx-row:last-child{border-bottom:none}
+  .fx-pair{display:flex;gap:10px}
+  .fx-char{width:64px;height:64px;border:2.5px solid #334155;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:2.4rem;font-weight:700;position:relative}
+  .fx-char .p{position:absolute;bottom:2px;right:4px;font-size:.5rem;color:var(--ink2)}
+  .fx-use{font-size:.95rem;color:var(--ink2)}
+  .fx-use b{color:var(--ink)}
+  .dy-char{font-size:2.2rem;font-weight:800;width:64px;text-align:center}
+  .dy-read{font-size:1.05rem;font-weight:700;background:#f1f5f9;border-radius:10px;padding:6px 12px}
+  .dy-read .ex{display:block;font-size:.85rem;color:var(--ink2);font-weight:500}
+  .verb-chip{display:inline-block;background:#fef3c7;border:2px solid #fde68a;color:#92400e;border-radius:999px;padding:6px 18px;font-size:1.15rem;font-weight:700;margin:4px}
+  .bs-char{font-size:2.6rem;font-weight:800;color:#b45309}
+  /* patterns */
+  .pat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px}
+  .pat-card{border-radius:18px;padding:20px 22px;border:2px solid}
+  .pat-card .pat{font-size:1.4rem;font-weight:900;letter-spacing:.03em}
+  .pat-card ul{margin:10px 0 0 1.2em}
+  .pat-card li{margin:4px 0;color:var(--ink2)}
+  .pat-card li b{color:var(--ink)}
+  .p1{background:var(--l1-bg);border-color:#fecdd3} .p1 .pat{color:var(--l1)}
+  .p2{background:var(--l2-bg);border-color:#99f6e4} .p2 .pat{color:var(--l2)}
+  .p3{background:var(--l3-bg);border-color:#ddd6fe} .p3 .pat{color:var(--l3)}
+  .p4{background:var(--l4-bg);border-color:#fde68a} .p4 .pat{color:var(--l4)}
+  /* practice */
+  #practice .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+  .tab-btn{border:2px solid #e2e8f0;background:#fff;border-radius:999px;padding:9px 20px;font-size:1rem;font-weight:700;cursor:pointer;color:var(--ink2);transition:.15s}
+  .tab-btn.active{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .tab-btn small{display:block;font-size:.68rem;color:#94a3b8;font-weight:600}
+  .tab-btn.active small{color:#cbd5e1}
+  .panel{display:none;background:var(--card);border:2px solid #e2e8f0;border-radius:20px;padding:24px 26px}
+  .panel.active{display:block}
+  .bank{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:20px;padding:14px;background:#f8fafc;border-radius:14px;border:2px dashed #cbd5e1}
+  .bank .lbl{width:100%;font-size:.9rem;font-weight:700;color:var(--ink2)}
+  .chip-w{border:2px solid var(--l2);background:#fff;color:var(--l2);border-radius:999px;padding:7px 18px;font-size:1.15rem;font-weight:700;cursor:pointer;transition:.12s}
+  .chip-w:hover{transform:translateY(-2px)}
+  .chip-w.sel{background:var(--l2);color:#fff;box-shadow:0 4px 10px rgba(13,148,136,.35)}
+  .chip-w.used{visibility:hidden}
+  .q-item{padding:14px 0;border-bottom:1px dashed #e2e8f0;font-size:1.25rem}
+  .q-item:last-of-type{border-bottom:none}
+  .blank{display:inline-block;min-width:6em;text-align:center;border-bottom:3px solid #94a3b8;margin:0 4px;padding:0 8px;color:var(--l2);font-weight:800;cursor:pointer;border-radius:6px}
+  .blank:hover{background:#f1f5f9}
+  .blank.ok{color:var(--ok);border-bottom-color:var(--ok);background:var(--ok-bg)}
+  .blank.bad{color:var(--bad);border-bottom-color:var(--bad);background:var(--bad-bg)}
+  .nav-links a small{font-size:.66rem;color:#94a3b8;font-weight:600;margin-left:4px;letter-spacing:.03em}
+  .pat-card .pat-en{font-size:.85rem;color:var(--ink2);font-weight:700;margin-top:2px}
+  .pat-card li .li-en{display:block;font-size:.78rem;color:#94a3b8}
+  .q-en{display:block;font-size:.85rem;color:#94a3b8;margin-top:2px}
+  .q-line{font-size:1.25rem}
+  .opt-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+  .opt{border:2px solid #e2e8f0;background:#fff;border-radius:12px;padding:8px 22px;font-size:1.15rem;font-weight:700;cursor:pointer;transition:.12s}
+  .opt:hover{border-color:#94a3b8;transform:translateY(-2px)}
+  .opt.ok{background:var(--ok-bg);border-color:var(--ok);color:var(--ok)}
+  .opt.bad{background:var(--bad-bg);border-color:var(--bad);color:var(--bad)}
+  .opt:disabled{cursor:default;opacity:.85}
+  .fb{margin-top:8px;font-size:.95rem;font-weight:600;display:none}
+  .fb.show{display:block}
+  .fb.ok{color:var(--ok)} .fb.bad{color:var(--bad)}
+  .p-actions{display:flex;gap:12px;align-items:center;margin-top:18px;flex-wrap:wrap}
+  .btn-main{border:none;background:var(--ink);color:#fff;border-radius:12px;padding:11px 26px;font-size:1.05rem;font-weight:700;cursor:pointer;transition:.15s}
+  .btn-main:hover{transform:translateY(-2px)}
+  .btn-ghost{border:2px solid #cbd5e1;background:#fff;border-radius:12px;padding:10px 22px;font-size:1rem;font-weight:700;cursor:pointer;color:var(--ink2)}
+  .score{font-size:1.1rem;font-weight:800;margin-left:auto}
+  .score.ok{color:var(--ok)} .score.bad{color:var(--bad)}
+  /* fullscreen overlay */
+  #fsOverlay{position:fixed;inset:0;z-index:1000;background:linear-gradient(160deg,#0f172a,#1e293b);display:none;flex-direction:column;color:#fff}
+  #fsOverlay.open{display:flex}
+  .fs-head{display:flex;align-items:center;justify-content:space-between;padding:16px 26px;gap:14px;flex-wrap:wrap}
+  .fs-info{font-size:1.3rem;font-weight:800}
+  .fs-info .sub{font-size:1rem;font-weight:600;color:#94a3b8;margin-left:12px}
+  .fs-body{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:0 20px 20px;min-height:0}
+  .fs-stage{display:flex;align-items:center;gap:26px;flex-wrap:wrap;justify-content:center}
+  .fs-tzg{--tile:min(62vmin,560px);width:min(62vmin,560px);height:min(62vmin,560px);border-width:5px;border-radius:18px;background:#fff;position:relative}
+  .fs-tzg .grid::before,.fs-tzg .grid::after{border-width:3px;opacity:.55}
+  .fs-nav{display:flex;flex-direction:column;gap:12px}
+  .fs-nav button{width:64px;height:64px;border-radius:50%;border:none;background:rgba(255,255,255,.14);color:#fff;font-size:1.5rem;cursor:pointer;transition:.15s}
+  .fs-nav button:hover{background:rgba(255,255,255,.3)}
+  .fs-nav button:disabled{opacity:.25;cursor:default}
+  .fs-meta{font-size:1.35rem;font-weight:800;letter-spacing:.05em;min-height:1.8em}
+  .fs-meta .note{font-size:1rem;color:#94a3b8;font-weight:600;margin-left:10px}
+  .fs-controls{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;padding:0 20px 26px}
+  .fbtn{border:2px solid rgba(255,255,255,.35);background:rgba(255,255,255,.1);color:#fff;border-radius:14px;padding:12px 24px;font-size:1.05rem;font-weight:700;cursor:pointer;transition:.15s}
+  .fbtn:hover{background:rgba(255,255,255,.25)}
+  .fbtn.primary{background:#0d9488;border-color:#0d9488}
+  .fbtn.primary:hover{background:#14b8a6}
+  .fbtn.warn{background:#d97706;border-color:#d97706}
+  .fbtn.warn:hover{background:#f59e0b}
+  .fbtn small{font-size:.68rem;font-weight:600;opacity:.75;margin-left:2px}
+  .fbtn.on{background:#0d9488;border-color:#0d9488}
+  footer{max-width:1100px;margin:40px auto 30px;padding:0 20px;color:#94a3b8;font-size:.9rem;text-align:center}
+  @media (max-width:640px){
+    :root{--tile:96px}
+    .stroke-btn{width:34px;height:34px;font-size:.9rem}
+    .fs-tzg{--tile:min(80vmin,560px);width:min(80vmin,560px);height:min(80vmin,560px)}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo">📕 <span class="b1">單元一</span> · <span class="b2">學習重點</span></div>
+    <div class="nav-links">
+      <a href="#overview">總覽<small>Home</small></a>
+      <a href="#read">認讀字詞<small>Words</small></a>
+      <a href="#write">書寫字詞<small>Writing</small></a>
+      <a href="#knowledge">字詞知識<small>Know-how</small></a>
+      <a href="#patterns">句式<small>Patterns</small></a>
+      <a href="#practice">練習題<small>Practice</small></a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="overview">
+  <div class="hero-card">
+    <h1>單元一 學習重點<small>三年級 中文 ·《我愛學語文》二上 第一冊 · Grade 3 Chinese · Unit 1 Study Guide</small></h1>
+    <div class="lesson-cards" id="lessonCards"></div>
+  </div>
+</header>
+
+<main>
+  <section id="read">
+    <div class="sec-head"><h2>🗣️ 認讀字詞</h2><span class="en">Read &amp; Recognise · 字詞 Words</span></div>
+    <p class="sec-desc">點擊詞語卡可以聽讀音，跟着讀一讀。<span class="en-gloss">Tap a word card to hear it read aloud — read along!</span></p>
+    <div id="readBlocks"></div>
+  </section>
+
+  <section id="write">
+    <div class="sec-head"><h2>✏️ 書寫字詞</h2><span class="en">Write · 田字格 Tian Zi Ge Grid</span></div>
+    <p class="sec-desc">每個字都放在田字格中。點擊字 → 在格內示範筆畫動畫；點擊字旁邊的紅色「筆」按鈕 → <b>全屏展示筆畫順序</b>（可放慢、可逐字翻頁，還有筆畫小測驗）。<span class="en-gloss">Every character sits in a Tian Zi Ge grid. Tap a character to see the stroke animation in its grid; tap the red「筆」button beside it for a <b>fullscreen stroke-order demo</b> (slow mode, word-by-word navigation, and a stroke quiz).</span></p>
+    <div id="writeBlocks"></div>
+  </section>
+
+  <section id="knowledge">
+    <div class="sec-head"><h2>🧠 字詞知識</h2><span class="en">形近字 Look-alikes · 多音字 Multi-reading · 部首 Radicals · 動詞 Verbs</span></div>
+    <div class="kn-grid">
+      <div class="kn-card">
+        <h3>🔍 形近字 <span class="tag">Look-alike characters · 分清它們</span></h3>
+        <div class="fx-row"><div class="fx-pair"><div class="fx-char">像<span class="p">xiàng</span></div><div class="fx-char">象<span class="p">xiàng</span></div></div><div class="fx-use"><b>像</b>：好像、畫像<br><b>象</b>：大象、象鼻</div></div>
+        <div class="fx-row"><div class="fx-pair"><div class="fx-char">辛<span class="p">xīn</span></div><div class="fx-char">幸<span class="p">xìng</span></div></div><div class="fx-use"><b>辛</b>：辛苦、辛勞<br><b>幸</b>：幸好、幸福</div></div>
+        <div class="fx-row"><div class="fx-pair"><div class="fx-char">藍<span class="p">lán</span></div><div class="fx-char">籃<span class="p">lán</span></div></div><div class="fx-use"><b>藍</b>：藍天、藍色<br><b>籃</b>：籃球、竹籃</div></div>
+      </div>
+      <div class="kn-card">
+        <h3>🎵 多音字 <span class="tag">Multi-reading characters · 一字多音</span></h3>
+        <div class="fx-row"><div class="dy-char">好</div><div style="display:flex;flex-direction:column;gap:6px"><div class="dy-read">hǎo（三聲）<span class="ex">好人 · 很好 · 好孩子</span></div><div class="dy-read">hào（四聲）<span class="ex">好動 · 愛好</span></div></div></div>
+        <div class="fx-row"><div class="dy-char">得</div><div style="display:flex;flex-direction:column;gap:6px"><div class="dy-read">dé（二聲）<span class="ex">得到 · 得獎</span></div><div class="dy-read">děi（三聲）<span class="ex">我得去做功課了</span></div></div></div>
+        <div class="fx-row"><div class="dy-char">着</div><div style="display:flex;flex-direction:column;gap:6px"><div class="dy-read">zhe（輕聲）<span class="ex">看着書 · 陪着媽媽</span></div><div class="dy-read">zháo（二聲）<span class="ex">睡着了 · 着火</span></div></div></div>
+      </div>
+      <div class="kn-card">
+        <h3>🧩 部首 <span class="tag">Radicals · 認一認</span></h3>
+        <div class="fx-row"><div class="bs-char">扌</div><div class="fx-use" style="font-size:1.05rem"><b>提手旁</b> —— 和手的動作有關 <span class="en-gloss">the hand radical — relates to hand actions</span><br><span class="verb-chip">抓</span><span class="verb-chip">扶</span><span class="verb-chip">探</span><span class="verb-chip">接</span><span class="verb-chip">換</span><span class="verb-chip">摘</span><span class="verb-chip">摸</span><span class="verb-chip">伸</span></div></div>
+        <div class="fx-row"><div class="bs-char">宀</div><div class="fx-use" style="font-size:1.05rem"><b>寶蓋頭</b> —— 常和房屋、家有關 <span class="en-gloss">the roof radical — often relates to houses and home</span><br><span class="verb-chip">定</span><span class="verb-chip">家</span><span class="verb-chip">它</span></div></div>
+      </div>
+      <div class="kn-card">
+        <h3>🏃 動詞 <span class="tag">Action verbs · 動作詞</span></h3>
+        <div class="fx-row"><div class="fx-use" style="font-size:1.05rem"><b>第一課《欣欣的故事》</b><br><span class="verb-chip">講</span><span class="verb-chip">唱</span><span class="verb-chip">穿</span><span class="verb-chip">問</span><span class="verb-chip">畫</span><span class="verb-chip">踢</span><span class="verb-chip">做</span></div></div>
+        <div class="fx-row"><div class="fx-use" style="font-size:1.05rem"><b>第四課《在爸爸的肩膀上》</b><br><span class="verb-chip">坐</span><span class="verb-chip">扶</span><span class="verb-chip">抓</span><span class="verb-chip">摸</span><span class="verb-chip">聞</span><span class="verb-chip">摘</span><span class="verb-chip">伸</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="patterns">
+    <div class="sec-head"><h2>💬 句式句型</h2><span class="en">Sentence Patterns</span></div>
+    <div class="pat-grid">
+      <div class="pat-card p1"><div class="pat">越 …… 越 ……</div><div class="pat-en">the more … the more …</div><ul><li>妹妹<b>越</b>長<b>越</b>漂亮。<span class="li-en">My little sister grows prettier and prettier.</span></li><li>天氣<b>越</b>來<b>越</b>冷了。<span class="li-en">The weather is getting colder and colder.</span></li></ul></div>
+      <div class="pat-card p1"><div class="pat">會 …… 還會 ……</div><div class="pat-en">can … and can also …</div><ul><li>我<b>會</b>講故事，<b>還會</b>唱歌。<span class="li-en">I can tell stories, and I can also sing.</span></li><li>弟弟<b>會</b>穿衣服，<b>還會</b>綁鞋帶。<span class="li-en">My little brother can get dressed, and he can also tie his shoelaces.</span></li></ul></div>
+      <div class="pat-card p2"><div class="pat">…… ，還 ……。</div><div class="pat-en">…, and also …</div><ul><li>他是我的同學，<b>還</b>是我的好朋友。<span class="li-en">He is my classmate, and also my good friend.</span></li><li>我喜歡畫畫，<b>還</b>喜歡看書。<span class="li-en">I like drawing, and I also like reading.</span></li></ul></div>
+      <div class="pat-card p2"><div class="pat">除了 …… 就 ……。</div><div class="pat-en">apart from …, (there is) only …</div><ul><li>他<b>除了</b>喜歡踢球，<b>就</b>喜歡游泳。<span class="li-en">Apart from playing football, he only likes swimming.</span></li><li>書包裏<b>除了</b>課本，<b>就</b>只有一枝筆。<span class="li-en">Apart from textbooks, there is only one pen in the schoolbag.</span></li></ul></div>
+      <div class="pat-card p3"><div class="pat">…… 一 …… ，就 ……。</div><div class="pat-en">as soon as …, (then) …</div><ul><li>他<b>一</b>到家，<b>就</b>開始做功課。<span class="li-en">As soon as he gets home, he starts his homework.</span></li><li>弟弟<b>一</b>聽到音樂，<b>就</b>跳起舞來。<span class="li-en">As soon as my brother hears music, he starts to dance.</span></li></ul></div>
+      <div class="pat-card p4"><div class="pat">…… 得 ……</div><div class="pat-en">describes how well an action is done (complement of degree)</div><ul><li>我坐<b>得</b>穩。<span class="li-en">I sit steadily.</span></li><li>他扶<b>得</b>牢。<span class="li-en">He holds on firmly.</span></li><li>弟弟抓<b>得</b>緊。<span class="li-en">My brother grips tightly.</span></li></ul></div>
+    </div>
+  </section>
+
+  <section id="practice">
+    <div class="sec-head"><h2>🎯 練習題</h2><span class="en">Practice</span></div>
+    <p class="sec-desc">四種互動練習，做完可以看看分數！<span class="en-gloss">Four interactive exercises — check your score when you're done!</span></p>
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="fill">① 選詞填空<small>Fill in the blanks</small></button>
+      <button class="tab-btn" data-tab="duo">② 多音字選擇<small>Multi-reading</small></button>
+      <button class="tab-btn" data-tab="fx">③ 形近字選擇<small>Look-alikes</small></button>
+      <button class="tab-btn" data-tab="pat">④ 句式練習<small>Sentence patterns</small></button>
+    </div>
+    <div class="panel active" id="panel-fill"></div>
+    <div class="panel" id="panel-duo"></div>
+    <div class="panel" id="panel-fx"></div>
+    <div class="panel" id="panel-pat"></div>
+  </section>
+</main>
+
+<footer>單元一 學習重點 · 三年級中文 Unit 1 Study Guide · Grade 3 Chinese ·《我愛學語文》二上第一冊 · 筆畫動畫 Strokes by Hanzi Writer</footer>
+
+<!-- fullscreen stroke overlay -->
+<div id="fsOverlay" role="dialog" aria-label="筆畫全屏展示 Fullscreen stroke demo">
+  <div class="fs-head">
+    <div class="fs-info"><span id="fsWord"></span><span class="sub" id="fsPos"></span></div>
+    <button class="fbtn" id="fsSpeak">🔊 讀一讀 <small>Read</small></button>
+    <button class="fbtn" id="fsClose">✕ 關閉 <small>Close</small></button>
+  </div>
+  <div class="fs-body">
+    <div class="fs-meta" id="fsMeta"></div>
+    <div class="fs-stage">
+      <div class="fs-nav">
+        <button id="fsPrev" title="上一個字 Previous character">⬆</button>
+        <button id="fsNext" title="下一個字 Next character">⬇</button>
+      </div>
+      <div class="tzg fs-tzg"><div class="grid"></div><div id="fsWriterHost"></div></div>
+      <div class="fs-nav">
+        <button id="fsPrevW" title="上一個詞 Previous word">⬅</button>
+        <button id="fsNextW" title="下一個詞 Next word">➡</button>
+      </div>
+    </div>
+  </div>
+  <div class="fs-controls">
+    <button class="fbtn primary" id="fsPlay">▶ 動畫示範 <small>Animate</small></button>
+    <button class="fbtn warn" id="fsQuiz">✍ 筆畫小測驗 <small>Quiz</small></button>
+    <button class="fbtn" id="fsShow">👁 顯示整個字 <small>Show</small></button>
+    <span style="align-self:center;color:#94a3b8;font-weight:700">速度 Speed：</span>
+    <button class="fbtn spd" data-spd="0.55">🐢 慢</button>
+    <button class="fbtn spd on" data-spd="1">▶ 正常</button>
+    <button class="fbtn spd" data-spd="2">🐇 快</button>
+  </div>
+</div>
+
+<script src="hanzi-writer.min.js"></script>
+<script src="char-data.js"></script>
+<script>
+/* ==================== DATA ==================== */
+const LESSONS = [
+  {
+    no: 1, title: "欣欣的故事", cls: "l1", color: "var(--l1)",
+    read: [["家務","jiā wù","housework"],["總是","zǒng shì","always"],["整天","zhěng tiān","all day long"],["洋娃娃","yáng wá wa","doll"],["被子","bèi zi","quilt"],["咿咿呀呀","yī yī yā yā","babbling"],["拉","lā","to pull"],["現在","xiàn zài","now"],["討人喜歡","tǎo rén xǐ huān","adorable"]],
+    write: [["兩歲","liǎng suì","two years old"],["非常","fēi cháng","very"],["活潑","huó po","lively"],["探望","tàn wàng","to visit"],["開始","kāi shǐ","to start"],["換牙","huàn yá","to lose baby teeth"],["穿衣服","chuān yī fú","to get dressed"],["幫忙","bāng máng","to help"],["好動","hào dòng","active"],["奇怪","qí guài","strange"]]
+  },
+  {
+    no: 2, title: "以前和現在", cls: "l2", color: "var(--l2)",
+    read: [["除了","chú le","except for"],["包括","bāo kuò","to include"],["毯子","tǎn zi","blanket"],["其他","qí tā","others"],["依然","yī rán","still"]],
+    write: [["以前","yǐ qián","in the past"],["一切","yí qiè","everything"],["睡覺","shuì jiào","to sleep"],["顏色","yán sè","colour"],["但是","dàn shì","but"],["有些","yǒu xiē","some"],["一樣","yí yàng","the same"],["功課","gōng kè","homework"],["故事","gù shi","story"],["改變","gǎi biàn","to change"],["美麗","měi lì","beautiful"],["陪着","péi zhe","to keep company"]]
+  },
+  {
+    no: 3, title: "換牙", cls: "l3", color: "var(--l3)",
+    read: [["脫落","tuō luò","to fall out"],["耍把戲","shuǎ bǎ xì","to play tricks"],["抱不平","bào bù píng","to cry out against injustice"]],
+    write: [["頑皮","wán pí","naughty"],["自覺","zì jué","self-disciplined"],["照鏡子","zhào jìng zi","to look in the mirror"],["遊樂場","yóu lè chǎng","playground"],["關閉","guān bì","to close"],["門牙","mén yá","front tooth"],["之後","zhī hòu","afterwards"],["嘴","zuǐ","mouth"],["接下來","jiē xià lái","next"],["吹氣","chuī qì","to blow"],["幸好","xìng hǎo","luckily"],["替","tì","to replace"]]
+  },
+  {
+    no: 4, title: "在爸爸的肩膀上", cls: "l4", color: "var(--l4)",
+    read: [["寬闊","kuān kuò","broad"],["肩膀","jiān bǎng","shoulder"],["寶貝","bǎo bèi","darling"]],
+    write: [["藍天白雲","lán tiān bái yún","blue sky and white clouds"],["抓緊","zhuā jǐn","to hold tight"],["強壯","qiáng zhuàng","strong"],["頭髮","tóu fa","hair"],["聞","wén","to smell"],["味道","wèi dào","smell; taste"],["摘星星","zhāi xīng xing","to pick stars"],["夜空","yè kōng","night sky"],["摸到","mō dào","to touch"],["伸手","shēn shǒu","to reach out"],["一定","yí dìng","surely"],["只要","zhǐ yào","as long as"]]
+  }
+];
+
+/* flattened write-word sequence for fullscreen navigation */
+const FLAT = [];
+LESSONS.forEach((L, li) => L.write.forEach((w, wi) => FLAT.push({ li, wi, word: w[0], py: w[1], chars: [...w[0]] })));
+
+/* ==================== SPEECH (neural MP3 first, system TTS fallback) ==================== */
+let voices = [];
+function loadVoices(){ voices = speechSynthesis.getVoices(); }
+loadVoices(); speechSynthesis.onvoiceschanged = loadVoices;
+let curAudio = null;
+function speak(text, btn){
+  markSpeaking(btn, true);
+  const stopAll = ()=>{
+    if(curAudio){ curAudio.pause(); curAudio = null; }
+    if("speechSynthesis" in window) speechSynthesis.cancel();
+  };
+  stopAll();
+  const done = ()=>markSpeaking(btn, false);
+  /* 1) local neural voice (pre-generated MP3) */
+  const a = new Audio("audio/" + text + ".mp3");
+  a.onended = done; a.onerror = ()=>{
+    /* 2) fallback: system speech synthesis */
+    if(!("speechSynthesis" in window)){ done(); return; }
+    const v = voices.find(v=>/^zh[-_]CN/i.test(v.lang)) || voices.find(v=>/Chinese/i.test(v.name)) || voices.find(v=>/^zh[-_]Hans/i.test(v.lang)) || voices.find(v=>/^zh/i.test(v.lang));
+    const u = new SpeechSynthesisUtterance(text);
+    if(v) u.voice = v;
+    u.lang = v ? v.lang : "zh-CN"; u.rate = 0.85;
+    u.onend = done; u.onerror = done;
+    speechSynthesis.speak(u);
+  };
+  curAudio = a;
+  a.play().catch(()=>done());
+}
+function markSpeaking(btn, on){
+  if(!btn) return;
+  document.querySelectorAll(".rw-card.speaking").forEach(e=>e.classList.remove("speaking"));
+  if(on) btn.classList.add("speaking"); else btn.classList.remove("speaking");
+}
+
+/* ==================== HERO CARDS ==================== */
+document.getElementById("lessonCards").innerHTML = LESSONS.map((L,i)=>`
+  <div class="lesson-card lc${L.no}" onclick="document.getElementById('${i===0?"read":"write"}').scrollIntoView()">
+    <div class="no">第 ${L.no} 課</div>
+    <div class="tt">《${L.title}》</div>
+    <div class="ct">認讀 ${L.read.length} 個 · 書寫 ${L.write.length} 個詞語<br><span class="en-gloss">Read ${L.read.length} · Write ${L.write.length} words</span></div>
+  </div>`).join("");
+
+/* ==================== READ SECTION ==================== */
+document.getElementById("readBlocks").innerHTML = LESSONS.map(L=>`
+  <div class="lesson-block ${L.cls}">
+    <div class="lb-title">第 ${L.no} 課《${L.title}》<span class="chip">認讀 ${L.read.length} 個</span></div>
+    <div class="word-grid">
+      ${L.read.map(r=>`<div class="rw-card" onclick="speak('${r[0]}', this)"><span class="w">${r[0]}</span><span class="mid"><span class="py">${r[1]}</span><span class="en-gloss">${r[2]}</span></span><span class="sp">🔊</span></div>`).join("")}
+    </div>
+  </div>`).join("");
+
+/* ==================== WRITE SECTION (田字格) ==================== */
+const HW_OPTS = {
+  width: null, height: null, padding: 4,
+  strokeColor: "#0f172a", outlineColor: "#cbd5e1", radicalColor: "#ea580c",
+  showOutline: true, showCharacter: true,
+  charDataLoader: (ch, done) => done(window.CHAR_DATA[ch] || null),
+  strokeAnimationSpeed: 1, delayBetweenStrokes: 260
+};
+const tileWriters = {};
+
+document.getElementById("writeBlocks").innerHTML = LESSONS.map((L, li)=>`
+  <div class="lesson-block ${L.cls}">
+    <div class="lb-title">第 ${L.no} 課《${L.title}》<span class="chip">書寫 ${L.write.length} 個</span></div>
+    <div class="write-grid">
+      ${L.write.map((w, wi)=>`
+        <div class="word-block t${L.no}">
+          <div class="top"><span class="py">${w[1]}</span><span class="en-gloss">${w[2]}</span><button class="sp" title="讀一讀 Read aloud" onclick="speak('${w[0]}')">🔊</button></div>
+          <div class="char-row">
+            ${[...w[0]].map((ch, ci)=>`
+              <div class="char-tile">
+                <div class="tzg" id="tzg-${li}-${wi}-${ci}"><div class="grid"></div></div>
+                <button class="stroke-btn" title="全屏展示「${ch}」的筆畫" onclick="openFS(${li},${wi},${ci})">筆</button>
+              </div>`).join("")}
+          </div>
+        </div>`).join("")}
+    </div>
+  </div>`).join("");
+
+/* create writers after DOM ready (deferred to let layout paint first) */
+function initTileWriters(){
+  const size = document.querySelector(".tzg") ? document.querySelector(".tzg").clientWidth : 124;
+  LESSONS.forEach((L, li)=>L.write.forEach((w, wi)=>[...w[0]].forEach((ch, ci)=>{
+    const host = document.getElementById(`tzg-${li}-${wi}-${ci}`);
+    if(!host) return;
+    if(window.CHAR_DATA[ch]){
+      const wr = HanziWriter.create(host, ch, Object.assign({}, HW_OPTS, {width:size, height:size}));
+      tileWriters[`${li}-${wi}-${ci}`] = wr;
+      host.onclick = ()=>{ wr.hideCharacter(); wr.animateCharacter({strokeAnimationSpeed:.75, delayBetweenStrokes:420}); };
+    } else {
+      const d = document.createElement("div"); d.className="fallback"; d.textContent=ch; host.appendChild(d);
+    }
+  })));
+}
+window.addEventListener("load", ()=>setTimeout(initTileWriters, 60));
+
+/* ==================== FULLSCREEN STROKE PLAYER ==================== */
+const fsOverlay = document.getElementById("fsOverlay");
+let FS = { f:-1, c:0, writer:null, speed:1 };
+
+function fsSize(){ const t = document.querySelector(".fs-tzg"); return t ? t.clientWidth : 480; }
+function fsWriterOpts(){ return {
+  width: fsSize(), height: fsSize(), padding: 10,
+  strokeColor: "#0f172a", outlineColor: "#cbd5e1", radicalColor: "#ea580c",
+  showOutline: true, showCharacter: false,
+  charDataLoader: (ch, done) => done(window.CHAR_DATA[ch] || null),
+  strokeAnimationSpeed: FS.speed, delayBetweenStrokes: 420*FS.speed, highlightOnComplete: true
+};}
+
+function setFsMeta(html){ document.getElementById("fsMeta").innerHTML = html; }
+
+function fsRender(){
+  const item = FLAT[FS.f];
+  document.getElementById("fsWord").textContent = item.word;
+  document.getElementById("fsPos").textContent = `第 ${item.li+1} 課 Lesson ${item.li+1} · ${item.py} · ${item.chars[FS.c]} 第 ${FS.c+1}/${item.chars.length} 個字`;
+  document.getElementById("fsPrev").disabled = (FS.f===0 && FS.c===0);
+  document.getElementById("fsNext").disabled = (FS.f===FLAT.length-1 && FS.c===item.chars.length-1);
+  document.getElementById("fsPrevW").disabled = FS.f===0;
+  document.getElementById("fsNextW").disabled = FS.f===FLAT.length-1;
+  const ch = item.chars[FS.c];
+  const host = document.getElementById("fsWriterHost");
+  host.innerHTML = "";
+  const n = window.CHAR_DATA[ch] ? window.CHAR_DATA[ch].strokes.length : "?";
+  setFsMeta(`「${ch}」 共 ${n} 畫 · ${n} strokes <span class="note">跟着動畫，用手指寫一寫 · trace along with your finger</span>`);
+  if(window.CHAR_DATA[ch]){
+    FS.writer = HanziWriter.create(host, ch, fsWriterOpts());
+    FS.writer.hideCharacter();
+    FS.writer.animateCharacter();
+  } else {
+    const d = document.createElement("div"); d.className="fallback"; d.style.fontSize="18rem"; d.textContent=ch; host.appendChild(d);
+  }
+}
+
+function openFS(li, wi, ci){
+  const idx = FLAT.findIndex(f=>f.li===li && f.wi===wi);
+  FS.f = idx; FS.c = ci;
+  fsOverlay.classList.add("open");
+  document.body.style.overflow = "hidden";
+  if(document.documentElement.requestFullscreen) document.documentElement.requestFullscreen().catch(()=>{});
+  fsRender();
+}
+function closeFS(){
+  fsOverlay.classList.remove("open");
+  document.body.style.overflow = "";
+  if(document.fullscreenElement && document.exitFullscreen) document.exitFullscreen().catch(()=>{});
+}
+document.getElementById("fsClose").onclick = closeFS;
+document.addEventListener("keydown", e=>{
+  if(!fsOverlay.classList.contains("open")) return;
+  if(e.key==="Escape") closeFS();
+  if(e.key==="ArrowDown"||e.key==="ArrowRight") step(1,0);
+  if(e.key==="ArrowUp"||e.key==="ArrowLeft") step(-1,0);
+});
+function step(dc, dw){
+  if(dw!==0){ FS.f = Math.min(FLAT.length-1, Math.max(0, FS.f+dw)); FS.c = 0; fsRender(); return; }
+  const item = FLAT[FS.f];
+  let c = FS.c + dc;
+  if(c < 0){ if(FS.f>0){ FS.f--; FS.c = FLAT[FS.f].chars.length-1; } else FS.c = 0; }
+  else if(c >= item.chars.length){ if(FS.f<FLAT.length-1){ FS.f++; FS.c=0; } }
+  else FS.c = c;
+  fsRender();
+}
+document.getElementById("fsPrev").onclick = ()=>step(-1,0);
+document.getElementById("fsNext").onclick = ()=>step(1,0);
+document.getElementById("fsPrevW").onclick = ()=>step(0,-1);
+document.getElementById("fsNextW").onclick = ()=>step(0,1);
+document.getElementById("fsPlay").onclick = ()=>{
+  if(!FS.writer) return;
+  setFsMeta(`「${FLAT[FS.f].chars[FS.c]}」 看清楚筆畫順序 Watch the stroke order carefully ✍️`);
+  FS.writer.hideCharacter(); FS.writer.showOutline();
+  FS.writer.animateCharacter({strokeAnimationSpeed:FS.speed, delayBetweenStrokes:420*FS.speed});
+};
+document.getElementById("fsShow").onclick = ()=>{
+  if(!FS.writer) return;
+  FS.writer.showOutline(); FS.writer.showCharacter();
+  const ch = FLAT[FS.f].chars[FS.c];
+  setFsMeta(`「${ch}」 共 ${window.CHAR_DATA[ch].strokes.length} 畫 · ${window.CHAR_DATA[ch].strokes.length} strokes`);
+};
+document.getElementById("fsQuiz").onclick = ()=>{
+  if(!FS.writer) return;
+  const ch = FLAT[FS.f].chars[FS.c];
+  const total = window.CHAR_DATA[ch].strokes.length;
+  setFsMeta(`✍ 小測驗 Quiz：按順序寫「${ch}」 <span class="note">在字上按筆畫順序拖動 · drag along the strokes in order</span>`);
+  FS.writer.hideCharacter(); FS.writer.showOutline();
+  FS.writer.quiz({
+    showHintAfterMisses: 2,
+    leniency: 1.2,
+    onCorrectStroke: s=>setFsMeta(`✍ 第 ${s.strokeNum+1} / ${total} 畫 ✔ 繼續！Keep going!`),
+    onMistake: s=>setFsMeta(`❌ 第 ${s.strokeNum+1} 畫不對，再試一次 Not quite — try again`),
+    onComplete: sum=>setFsMeta(sum.totalMistakes===0 ? "🎉 全部正確，太棒了！Perfect!" : `🎉 完成！共錯了 ${sum.totalMistakes} 筆，再試一次？Done with ${sum.totalMistakes} mistakes — try again?`)
+  });
+};
+document.getElementById("fsSpeak").onclick = ()=>speak(FLAT[FS.f].word);
+document.querySelectorAll(".spd").forEach(b=>b.onclick = ()=>{
+  document.querySelectorAll(".spd").forEach(x=>x.classList.remove("on"));
+  b.classList.add("on"); FS.speed = parseFloat(b.dataset.spd);
+});
+window.addEventListener("resize", ()=>{ /* keep current writer; size fixed at creation is acceptable */ });
+
+/* ==================== PRACTICE ==================== */
+/* ---- tabs ---- */
+document.querySelectorAll(".tab-btn").forEach(b=>b.onclick = ()=>{
+  document.querySelectorAll(".tab-btn").forEach(x=>x.classList.remove("active"));
+  document.querySelectorAll(".panel").forEach(x=>x.classList.remove("active"));
+  b.classList.add("active");
+  document.getElementById("panel-"+b.dataset.tab).classList.add("active");
+});
+
+/* ---- 1. 選詞填空 ---- */
+const FILL = [
+  ["妹妹今年", "，已經會自己走路了。", "兩歲", "My little sister is two years old this year; she can already walk by herself."],
+  ["弟弟很", "，上課時總是坐不住。", "好動", "My little brother is very active; he can never sit still in class."],
+  ["我每天晚上九點就上床", "。", "睡覺", "I go to bed to sleep at nine every night."],
+  ["今天天氣晴朗，天空上有", "。", "藍天白雲", "The weather is fine today; there are blue skies and white clouds."],
+  ["奶奶年紀大了，", "都變白了。", "頭髮", "Grandma is getting old, and her hair has all turned white."],
+  ["放學後，我", "媽媽去買菜。", "陪着", "After school, I keep Mum company to go grocery shopping."],
+  ["這幾年，我的家鄉", "很大。", "改變", "My hometown has changed a lot in recent years."],
+  ["公園裏的花開得真", "！", "美麗", "The flowers in the park bloom so beautifully!"],
+  ["我想出去玩，", "要先做完功課。", "但是", "I want to go out to play, but I must finish my homework first."],
+  ["他", "喜歡畫畫，每天都練習。", "非常", "He likes drawing very much and practises every day."]
+];
+let fillState = { sel:null, filled:{} };
+function renderFill(){
+  fillState = { sel:null, filled:{} };
+  const bank = FILL.map(f=>f[2]).sort(()=>Math.random()-.5);
+  const panel = document.getElementById("panel-fill");
+  panel.innerHTML = `
+    <div class="bank" id="fillBank"><span class="lbl">📚 詞語庫（先點詞語，再點句子中的橫線） <span class="en-gloss">Word bank — tap a word first, then tap a blank in the sentence</span></span>
+      ${bank.map(w=>`<button class="chip-w" data-w="${w}">${w}</button>`).join("")}
+    </div>
+    ${FILL.map((f,i)=>`<div class="q-item">${i+1}. ${f[0]}<span class="blank" data-i="${i}">＿＿＿＿</span>${f[1]}<span class="q-en">${f[3]}</span></div>`).join("")}
+    <div class="p-actions">
+      <button class="btn-main" id="fillCheck">✅ 檢查答案 <small>Check</small></button>
+      <button class="btn-ghost" id="fillReset">🔄 重新開始 <small>Restart</small></button>
+      <span class="score" id="fillScore"></span>
+    </div>`;
+  panel.querySelectorAll(".chip-w").forEach(c=>c.onclick = ()=>{
+    if(c.classList.contains("used")) return;
+    panel.querySelectorAll(".chip-w").forEach(x=>x.classList.remove("sel"));
+    if(fillState.sel === c.dataset.w){ fillState.sel = null; return; }
+    fillState.sel = c.dataset.w; c.classList.add("sel");
+  });
+  panel.querySelectorAll(".blank").forEach(bl=>bl.onclick = ()=>{
+    const i = +bl.dataset.i;
+    if(bl.classList.contains("ok")||bl.classList.contains("bad")) return;
+    if(fillState.filled[i]){ // return word to bank
+      const old = fillState.filled[i]; delete fillState.filled[i];
+      const c = panel.querySelector(`.chip-w[data-w="${old}"]`); if(c) c.classList.remove("used");
+      bl.textContent = "＿＿＿＿"; bl.classList.remove("ok","bad"); return;
+    }
+    if(!fillState.sel) return;
+    bl.textContent = fillState.sel; fillState.filled[i] = fillState.sel;
+    const c = panel.querySelector(`.chip-w[data-w="${fillState.sel}"]`); if(c){ c.classList.remove("sel"); c.classList.add("used"); }
+    fillState.sel = null;
+  });
+  document.getElementById("fillCheck").onclick = ()=>{
+    let ok = 0, done = 0;
+    panel.querySelectorAll(".blank").forEach(bl=>{
+      const i = +bl.dataset.i;
+      if(!fillState.filled[i]){ bl.classList.remove("ok","bad"); return; }
+      done++;
+      const good = fillState.filled[i] === FILL[i][2];
+      bl.classList.toggle("ok", good); bl.classList.toggle("bad", !good);
+      if(good) ok++;
+    });
+    const sc = document.getElementById("fillScore");
+    if(done < FILL.length){ sc.textContent = `還有 ${FILL.length-done} 題未完成 · ${FILL.length-done} left`; sc.className="score bad"; return; }
+    sc.textContent = `得分 Score：${ok} / ${FILL.length} ${ok===FILL.length?"🎉 滿分！Full marks!":""}`;
+    sc.className = "score " + (ok===FILL.length?"ok":(ok>=FILL.length*0.6?"":"bad"));
+  };
+  document.getElementById("fillReset").onclick = renderFill;
+}
+renderFill();
+
+/* ---- multiple-choice renderer ---- */
+function renderChoice(panelId, data, prefix){
+  const panel = document.getElementById(panelId);
+  panel.innerHTML = data.map((q,i)=>`
+    <div class="q-item" data-q="${i}">
+      <div class="q-line">${i+1}. ${q.q}<span class="q-en">${q.en||""}</span></div>
+      <div class="opt-row">${q.opts.map((o,j)=>`<button class="opt" data-j="${j}">${o}</button>`).join("")}</div>
+      <div class="fb"></div>
+    </div>`).join("") + `
+    <div class="p-actions">
+      <button class="btn-ghost" id="${prefix}Reset">🔄 重做 <small>Try again</small></button>
+      <span class="score" id="${prefix}Score"></span>
+    </div>`;
+  const score = ()=>{ const done = panel.querySelectorAll(".fb.ok,.fb.bad").length/2;
+    const ok = panel.querySelectorAll(".fb.ok").length;
+    if(done < data.length) return null; return [ok, data.length]; };
+  panel.querySelectorAll(".q-item").forEach(item=>{
+    const q = data[+item.dataset.q], fb = item.querySelector(".fb");
+    item.querySelectorAll(".opt").forEach(btn=>btn.onclick = ()=>{
+      if(item.dataset.done) return;
+      item.dataset.done = "1";
+      const good = btn.textContent === q.a;
+      btn.classList.add(good?"ok":"bad");
+      if(!good) item.querySelectorAll(".opt").forEach(b=>{ if(b.textContent===q.a) b.classList.add("ok"); });
+      item.querySelectorAll(".opt").forEach(b=>b.disabled = true);
+      fb.textContent = (good ? "✔ 答對了！Correct!" : "✘ 正確答案是 The answer is「" + q.a + "」") + (q.note ? "　💡 " + q.note : "");
+      fb.className = "fb show " + (good?"ok":"bad");
+      const s = score();
+      if(s){ const sc = document.getElementById(prefix+"Score"); sc.textContent = `得分 Score：${s[0]} / ${s[1]} ${s[0]===s[1]?"🎉 滿分！Full marks!":""}`; sc.className="score "+(s[0]===s[1]?"ok":"bad"); }
+    });
+  });
+  document.getElementById(prefix+"Reset").onclick = ()=>renderChoice(panelId, data, prefix);
+}
+
+/* ---- 2. 多音字選擇 ---- */
+const DUO = [
+  {q:"弟弟很「好」動，一分鐘也停不下來。「好」讀作：", en:"My brother is so active — he can't stop for even a minute. How is 好 read?", opts:["hǎo","hào"], a:"hào", note:"好(hào)動 = 喜歡動，愛動 to be fond of moving about"},
+  {q:"她是一個「好」孩子，人人都喜歡她。「好」讀作：", en:"She is a good child; everyone likes her. How is 好 read?", opts:["hǎo","hào"], a:"hǎo", note:"好(hǎo) = 優秀的、善良的 good, well-behaved"},
+  {q:"我「得」到老師的稱讚，很開心。「得」讀作：", en:"I got praise from my teacher and I'm very happy. How is 得 read?", opts:["dé","děi"], a:"dé", note:"得(dé)到 = 獲得 to obtain, to get"},
+  {q:"你「得」快一點兒，不然要遲到了。「得」讀作：", en:"You have to hurry up, or you'll be late. How is 得 read?", opts:["dé","děi"], a:"děi", note:"得(děi) = 必須、需要 must, have to"},
+  {q:"他睡「着」了，我們小聲一點。「着」讀作：", en:"He has fallen asleep — let's be quiet. How is 着 read?", opts:["zhe","zháo"], a:"zháo", note:"睡着(zháo) = 進入睡眠 to fall asleep"},
+  {q:"妹妹安靜地看「着」圖畫書。「着」讀作：", en:"My little sister is quietly reading a picture book. How is 着 read?", opts:["zhe","zháo"], a:"zhe", note:"看着(zhe) = 動詞後的助詞，讀輕聲 a particle after a verb, unstressed"}
+];
+renderChoice("panel-duo", DUO, "duo");
+
+/* ---- 3. 形近字選擇 ---- */
+const FX = [
+  {q:"大＿＿＿的鼻子很長，還會噴水。", en:"The elephant has a long nose and can spray water.", opts:["象","像"], a:"象", note:"大象是動物，用「象」 elephant is an animal — use 象"},
+  {q:"妹妹長得＿＿＿媽媽一樣漂亮。", en:"My little sister looks just as pretty as Mum.", opts:["象","像"], a:"像", note:"好像、相似用「像」（有单人旁） to resemble — use 像 (with the person radical)"},
+  {q:"爺爺每天到田裏工作，十分＿＿＿苦。", en:"Grandpa works in the fields every day — very hard work.", opts:["辛","幸"], a:"辛", note:"辛苦用「辛」（有「十」字） hardworking/toilsome — use 辛"},
+  {q:"＿＿＿好今天沒有下雨，我們可以去公園玩。", en:"Luckily it didn't rain today, so we can go to the park.", opts:["辛","幸"], a:"幸", note:"幸好、幸福用「幸」 fortunately, lucky — use 幸"},
+  {q:"＿＿＿色的天空中飄着幾朵白雲。", en:"A few white clouds drift in the blue sky.", opts:["藍","籃"], a:"藍", note:"藍色、藍天用「藍」（草字頭） blue (colour/sky) — use 藍 (grass radical)"},
+  {q:"哥哥最喜歡打＿＿＿球。", en:"My big brother loves playing basketball.", opts:["藍","籃"], a:"籃", note:"籃球、竹籃用「籃」（竹字頭） basket(ball) — use 籃 (bamboo radical)"}
+];
+renderChoice("panel-fx", FX, "fx");
+
+/* ---- 4. 句式練習 ---- */
+const PAT = [
+  {q:"妹妹越長越＿＿＿。", en:"My little sister grows more and more ___.", opts:["漂亮","睡覺","頭髮"], a:"漂亮", note:"越……越…… 表示程度越來越高 the more … the more …"},
+  {q:"我會講故事，還會＿＿＿。", en:"I can tell stories, and I can also ___.", opts:["畫畫","以前","關閉"], a:"畫畫", note:"會……還會…… 表示學會的本領 can … and can also …"},
+  {q:"他一到家，就＿＿＿做功課。", en:"As soon as he gets home, he ___ his homework.", opts:["開始","美麗","門牙"], a:"開始", note:"一……就…… 表示動作緊接着發生 as soon as … then …"},
+  {q:"我坐得很＿＿＿，一點也不搖晃。", en:"I sit very ___; I don't wobble at all.", opts:["穩","怪","嘴"], a:"穩", note:"……得穩：坐得穩、扶得牢、抓得緊 steadily, firmly, tightly"},
+  {q:"弟弟抓得很＿＿＿，一點也不放開。", en:"My brother grips very ___; he won't let go at all.", opts:["緊","甜","藍"], a:"緊", note:"……得緊 = 抓得很用力 gripping tightly"},
+  {q:"書包裏除了課本，＿＿＿只有一枝筆。", en:"Apart from textbooks, there is only one pen in the schoolbag.", opts:["就","還","越"], a:"就", note:"除了……就…… 表示只限於這些 apart from …, only …"}
+];
+renderChoice("panel-pat", PAT, "pat");
+</script>
+</body>
+</html>
