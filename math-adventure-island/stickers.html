@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>装扮图鉴 · Outfit Collection</title>
+<style>
+  :root{--ink:#4a3b5c;--purple:#a186ff;--pink:#ff8fab;--yellow:#ffd166;--blue:#6ec1ff;--green:#7ee081;
+    --kai:"Kaiti SC","STKaiti","KaiTi","KaiTi_GB2312","楷体","TW-Kai","DFKai-SB","BiauKai",serif;
+    --latin:"Avenir Next","Trebuchet MS","Segoe UI",system-ui,sans-serif;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:var(--kai);color:var(--ink);
+    background:linear-gradient(160deg,#fff0f6 0%,#fff9e8 40%,#e8f4ff 100%);min-height:100vh;padding:28px 18px;}
+  .wrap{max-width:1240px;margin:0 auto;}
+  h1{font-size:28px;text-align:center;letter-spacing:1px;}
+  .topnav{display:flex;justify-content:center;margin-bottom:14px;}
+  .home-pill{display:inline-flex;align-items:center;gap:6px;text-decoration:none;
+    background:#efe6ff;color:var(--purple);border-radius:16px;padding:11px 20px;
+    font-size:16px;font-weight:800;letter-spacing:.5px;box-shadow:0 4px 12px rgba(161,134,255,.18);
+    transition:.15s;}
+  .home-pill:hover{background:#e2d5ff;transform:translateY(-1px);}
+  .home-pill .en{display:inline;font-family:var(--latin);font-size:11px;color:#a99cc0;font-weight:600;}
+  .sub{text-align:center;color:#9a8fb0;font-size:14px;margin:6px 0 24px;line-height:1.6;}
+  .sub .en{display:block;font-family:var(--latin);font-size:.75em;color:#b7aacd;margin-top:2px;}
+  .sec{margin-bottom:22px;}
+  .sec-title{font-size:18px;margin:18px 0 10px;display:flex;align-items:center;gap:8px;}
+  .sec-title .en{font-family:var(--latin);font-size:13px;color:#b7aacd;}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:14px;}
+  .slot{position:relative;background:#fff;border-radius:22px;padding:14px 10px 10px;text-align:center;
+    box-shadow:0 6px 18px rgba(161,134,255,.14);border:3px solid #f0eaff;transition:.15s;}
+  .slot.special{border-color:#ffce6e;background:linear-gradient(160deg,#fffdf2,#fff3f8);
+    box-shadow:0 6px 20px rgba(255,206,110,.4);}
+  .art{width:100%;aspect-ratio:1;display:flex;align-items:center;justify-content:center;}
+  .art svg{width:100%;height:100%;display:block;}
+  .nm{font-size:13px;font-weight:700;margin-top:6px;}
+  .day{font-family:var(--latin);font-size:11px;color:#b7aacd;margin-top:2px;}
+  .badge{position:absolute;top:8px;right:8px;font-size:10px;font-weight:700;color:#a97a00;
+    background:#ffeec2;border-radius:99px;padding:2px 7px;}
+  .cat{position:absolute;top:8px;left:8px;font-size:10px;font-weight:700;color:#fff;
+    background:var(--purple);border-radius:99px;padding:2px 7px;}
+  .slot[data-cat="shoes"] .cat{background:#4AA8E8;}
+  .slot[data-cat="glasses"] .cat{background:#FF6B9D;}
+  .slot[data-cat="clothes"] .cat{background:#C9B6FF;}
+  .slot[data-cat="back"] .cat{background:#8FD6FF;}
+  .slot[data-cat="acc"] .cat{background:#FFD166;color:#7a5f00;}
+  .foot{text-align:center;color:#b7aacd;font-size:12px;margin-top:28px;line-height:1.8;}
+  .foot .en{font-family:var(--latin);display:block;font-size:.7em;color:#c3b6d8;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topnav"><a class="home-pill" href="index.html" title="回到冒险岛主页">🏠 回冒险岛主页<span class="en">Back to Math Island</span></a></div>
+  <h1>👗 皮皮装扮图鉴 · 30 件</h1>
+  <div class="sub">每天闯关成功就能开宝箱获得一件装扮，快去更衣室给皮皮穿上吧！
+    <span class="en">Unlock one outfit piece per day — then dress Pipi up in the Dress-Up Room!</span>
+  </div>
+  <div id="root"></div>
+  <div class="foot">标有 ✨超级 的 6 件为每 5 天的金色稀有装扮（第 5、10、15、20、25、30 天）<br>
+    说明：所有图案均为原创设计的可爱卡通风格，给小鸡皮皮穿的小衣服、小帽子和小配饰。
+    <span class="en">The 6 golden SUPER items appear every 5 days. All artwork is original cute-cartoon style.</span>
+  </div>
+  <div class="topnav" style="margin:22px 0 0"><a class="home-pill" href="index.html" title="回到冒险岛主页">🏠 回冒险岛主页<span class="en">Back to Math Island</span></a></div>
+</div>
+<script>
+const CAT_META = [
+  ['hat',     '🎩 帽子',     'Hats'],
+  ['clothes', '👗 衣服',     'Outfits'],
+  ['glasses', '👓 眼镜',     'Glasses'],
+  ['shoes',   '👟 鞋子',     'Shoes'],
+  ['back',    '🎒 翅膀背包', 'Wings & Bags'],
+  ['acc',     '💎 配饰',     'Accessories']
+];
+const ITEMS = [
+  // 1 粉红蝴蝶结（帽子）
+  {d:1,  cat:'hat',     z:2, zh:'粉红蝴蝶结', en:'Pink Bow', box:[64,14,72,50], svg:`<ellipse cx="86" cy="34" rx="15" ry="12" fill="#FF8FAB" transform="rotate(-16 86 34)"/><ellipse cx="114" cy="34" rx="15" ry="12" fill="#FF8FAB" transform="rotate(16 114 34)"/><path d="M93 42 L84 60 L99 52 Z" fill="#FFB3C7"/><path d="M107 42 L116 60 L101 52 Z" fill="#FFB3C7"/><circle cx="100" cy="36" r="8" fill="#FF6B9D"/><circle cx="97" cy="33" r="2.4" fill="#FFD1DE"/>`},
+  // 2 天使小翅膀（翅膀背包）
+  {d:2,  cat:'back',    z:0, zh:'天使小翅膀', en:'Angel Wings', box:[10,110,180,78], svg:`<path d="M58 126 C 30 114 12 132 16 158 C 19 176 36 184 54 178 C 42 168 38 154 44 142 Z" fill="#FFFFFF" stroke="#E6DBF7" stroke-width="2.5" stroke-linejoin="round"/><path d="M142 126 C 170 114 188 132 184 158 C 181 176 164 184 146 178 C 158 168 162 154 156 142 Z" fill="#FFFFFF" stroke="#E6DBF7" stroke-width="2.5" stroke-linejoin="round"/><path d="M44 148 C 36 156 35 166 41 174 M52 144 C 45 154 44 164 50 174" stroke="#E6DBF7" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M156 148 C 164 156 165 166 159 174 M148 144 C 155 154 156 164 150 174" stroke="#E6DBF7" stroke-width="2" fill="none" stroke-linecap="round"/>`},
+  // 3 圆圆小眼镜（眼镜）
+  {d:3,  cat:'glasses', z:3, zh:'圆圆小眼镜', en:'Round Glasses', box:[42,66,116,42], svg:`<circle cx="76" cy="87" r="17" fill="#BDE3FF" fill-opacity=".3" stroke="#4A7FD6" stroke-width="4"/><circle cx="124" cy="87" r="17" fill="#BDE3FF" fill-opacity=".3" stroke="#4A7FD6" stroke-width="4"/><path d="M93 87 Q 100 81 107 87" stroke="#4A7FD6" stroke-width="4" fill="none"/><path d="M59 85 Q 50 84 45 79 M141 85 Q 150 84 155 79" stroke="#4A7FD6" stroke-width="4" fill="none" stroke-linecap="round"/><circle cx="70" cy="81" r="4" fill="#fff" opacity=".7"/><circle cx="118" cy="81" r="4" fill="#fff" opacity=".7"/>`},
+  // 4 小红雨靴（鞋子）
+  {d:4,  cat:'shoes',   z:1, zh:'小红雨靴', en:'Red Rain Boots', box:[60,168,80,34], svg:`<rect x="67" y="175" width="25" height="18" rx="6" fill="#FF6B6B"/><rect x="108" y="175" width="25" height="18" rx="6" fill="#FF6B6B"/><rect x="64" y="189" width="31" height="8" rx="4" fill="#E05555"/><rect x="105" y="189" width="31" height="8" rx="4" fill="#E05555"/><rect x="69" y="173" width="21" height="7" rx="3.5" fill="#FFD9E8"/><rect x="110" y="173" width="21" height="7" rx="3.5" fill="#FFD9E8"/>`},
+  // 5 公主皇冠（帽子·超级）
+  {d:5,  cat:'hat',     z:2, zh:'公主皇冠', en:'Princess Crown', box:[56,4,88,52], svg:`<path d="M64 46 L 74 22 L 88 38 L 100 14 L 112 38 L 126 22 L 136 46 Z" fill="#FFD24A" stroke="#D08E00" stroke-width="2.4" stroke-linejoin="round"/><rect x="61" y="43" width="78" height="11" rx="5.5" fill="#FFD24A" stroke="#D08E00" stroke-width="2.4"/><circle cx="100" cy="11" r="4.5" fill="#FF8FAB" stroke="#E8678C" stroke-width="1.4"/><circle cx="72" cy="24" r="3" fill="#8FD6FF"/><circle cx="128" cy="24" r="3" fill="#B6F09C"/><circle cx="80" cy="47" r="2.6" fill="#FF6B9D"/><circle cx="100" cy="48" r="2.6" fill="#8FD6FF"/><circle cx="120" cy="47" r="2.6" fill="#7EE081"/>`},
+  // 6 粉色小围巾（衣服）
+  {d:6,  cat:'clothes', z:1, zh:'粉色小围巾', en:'Pink Scarf', box:[64,120,80,60], svg:`<path d="M72 126 Q 100 143 128 126 L 132 140 Q 100 156 68 140 Z" fill="#FF8FAB"/><path d="M126 142 L 139 170 Q 141 177 134 177 L 125 175 Q 120 174 122 168 Z" fill="#FFB3C7"/><path d="M78 132 Q 100 145 122 132" stroke="#FFD1DE" stroke-width="3" fill="none" stroke-linecap="round"/>`},
+  // 7 蓝色运动鞋（鞋子）
+  {d:7,  cat:'shoes',   z:1, zh:'蓝色运动鞋', en:'Blue Sneakers', box:[62,172,76,26], svg:`<path d="M66 182 Q 66 176 74 176 L 88 176 Q 94 176 96 182 L 96 189 Q 96 194 91 194 L 70 194 Q 66 194 66 189 Z" fill="#4AA8E8"/><path d="M104 182 Q 104 176 112 176 L 126 176 Q 134 176 134 182 L 134 189 Q 134 194 130 194 L 108 194 Q 104 194 104 189 Z" fill="#4AA8E8"/><rect x="66" y="190" width="30" height="5" rx="2.5" fill="#FFF"/><rect x="104" y="190" width="30" height="5" rx="2.5" fill="#FFF"/><path d="M72 182 L 88 182 M110 182 L 126 182" stroke="#FFF" stroke-width="2.5" stroke-linecap="round"/><circle cx="92" cy="181" r="2" fill="#FFD166"/><circle cx="130" cy="181" r="2" fill="#FFD166"/>`},
+  // 8 爱心小项链（配饰）
+  {d:8,  cat:'acc',     z:3, zh:'爱心小项链', en:'Heart Necklace', box:[74,126,52,40], svg:`<path d="M78 130 Q 100 149 122 130" stroke="#FFD166" stroke-width="3" fill="none"/><path d="M100 158 C 88 150 84 142 90 138 C 95 135 99 138 100 141 C 101 138 105 135 110 138 C 116 142 112 150 100 158 Z" fill="#FF6B9D" stroke="#E8678C" stroke-width="1.6"/><circle cx="100" cy="161" r="2.2" fill="#FFD166"/>`},
+  // 9 彩虹毛线帽（帽子）
+  {d:9,  cat:'hat',     z:2, zh:'彩虹毛线帽', en:'Rainbow Beanie', box:[54,1,92,63], svg:`<path d="M62 52 C 62 16 138 16 138 52 Z" fill="#FF8FAB"/><path d="M70 34 C 88 26 112 26 130 34 L 133 46 C 110 36 90 36 67 46 Z" fill="#FFD166"/><path d="M82 24 C 92 21 108 21 118 24 L 122 34 C 108 29 92 29 78 34 Z" fill="#8FD6FF"/><rect x="58" y="50" width="84" height="10" rx="5" fill="#B6F09C"/><circle cx="100" cy="11" r="8" fill="#C9B6FF"/>`},
+  // 10 星星魔法斗篷（衣服·超级）
+  {d:10, cat:'clothes', z:0, zh:'星星魔法斗篷', en:'Star Cape', box:[28,116,144,76], svg:`<path d="M70 120 C 42 134 30 164 36 188 L 60 188 C 56 166 62 140 78 126 Z" fill="#A186FF" stroke="#8A6FD8" stroke-width="2" stroke-linejoin="round"/><path d="M130 120 C 158 134 170 164 164 188 L 140 188 C 144 166 138 140 122 126 Z" fill="#A186FF" stroke="#8A6FD8" stroke-width="2" stroke-linejoin="round"/><circle cx="48" cy="158" r="3.5" fill="#FFD166"/><circle cx="152" cy="158" r="3.5" fill="#FFD166"/><circle cx="52" cy="174" r="2.6" fill="#8FD6FF"/><circle cx="148" cy="174" r="2.6" fill="#8FD6FF"/>`},
+  // 11 星星眼镜（眼镜）
+  {d:11, cat:'glasses', z:3, zh:'星星眼镜', en:'Star Glasses', box:[58,66,84,36], svg:`<path d="M76 70 L 80 80 L 90 80 L 82 87 L 85 97 L 76 91 L 67 97 L 70 87 L 62 80 L 72 80 Z" fill="#FFD166" fill-opacity=".35" stroke="#F0B429" stroke-width="3" stroke-linejoin="round"/><path d="M124 70 L 128 80 L 138 80 L 130 87 L 133 97 L 124 91 L 115 97 L 118 87 L 110 80 L 120 80 Z" fill="#FFD166" fill-opacity=".35" stroke="#F0B429" stroke-width="3" stroke-linejoin="round"/><path d="M88 84 Q 100 78 112 84" stroke="#F0B429" stroke-width="3.5" fill="none"/>`},
+  // 12 小黄鸭背包（翅膀背包）
+  {d:12, cat:'back',    z:0, zh:'小黄鸭背包', en:'Duckie Backpack', box:[140,116,42,60], svg:`<ellipse cx="162" cy="152" rx="17" ry="21" fill="#FFD454" stroke="#EFA61A" stroke-width="2.5"/><circle cx="162" cy="128" r="9" fill="#FFE483"/><circle cx="159" cy="127" r="1.8" fill="#382D55"/><circle cx="165" cy="127" r="1.8" fill="#382D55"/><path d="M167 130 L 173 132 L 167 134 Z" fill="#EA7610"/><path d="M150 138 Q 154 150 151 160" stroke="#EFA61A" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M154 136 Q 146 140 144 148" stroke="#EFA61A" stroke-width="3" fill="none" stroke-linecap="round"/>`},
+  // 13 草莓连衣裙（衣服）
+  {d:13, cat:'clothes', z:1, zh:'草莓连衣裙', en:'Strawberry Dress', box:[50,116,100,78], svg:`<path d="M70 122 L 130 122 L 146 176 Q 100 189 54 176 Z" fill="#FF8FAB"/><path d="M70 122 Q 100 135 130 122 L 128 131 Q 100 143 72 131 Z" fill="#FFB3C7"/><circle cx="86" cy="147" r="3" fill="#FFF"/><circle cx="108" cy="151" r="3" fill="#FFF"/><circle cx="94" cy="164" r="3" fill="#FFF"/><circle cx="118" cy="167" r="3" fill="#FFF"/><circle cx="76" cy="161" r="2.6" fill="#FFF"/><path d="M100 120 L 95 129 L 105 129 Z" fill="#7EE081"/>`},
+  // 14 小猫拖鞋（鞋子）
+  {d:14, cat:'shoes',   z:1, zh:'小猫拖鞋', en:'Kitty Slippers', box:[62,170,76,30], svg:`<ellipse cx="80" cy="188" rx="17" ry="9" fill="#FFC2D6"/><ellipse cx="120" cy="188" rx="17" ry="9" fill="#FFC2D6"/><path d="M72 182 L 67 174 L 76 179 Z" fill="#FFC2D6"/><path d="M88 182 L 93 174 L 84 179 Z" fill="#FFC2D6"/><path d="M112 182 L 107 174 L 116 179 Z" fill="#FFC2D6"/><path d="M128 182 L 133 174 L 124 179 Z" fill="#FFC2D6"/><circle cx="80" cy="188" r="3.2" fill="#FF8FAB"/><circle cx="120" cy="188" r="3.2" fill="#FF8FAB"/>`},
+  // 15 闪亮公主鞋（鞋子·超级）
+  {d:15, cat:'shoes',   z:1, zh:'闪亮公主鞋', en:'Sparkly Princess Shoes', box:[60,174,80,26], svg:`<ellipse cx="80" cy="189" rx="16" ry="8.5" fill="#FFD1DE" stroke="#F2A3BD" stroke-width="2"/><ellipse cx="120" cy="189" rx="16" ry="8.5" fill="#FFD1DE" stroke="#F2A3BD" stroke-width="2"/><circle cx="80" cy="183" r="3.4" fill="#FF6B9D"/><circle cx="120" cy="183" r="3.4" fill="#FF6B9D"/><path d="M74 180 Q 80 176 86 180 M114 180 Q 120 176 126 180" stroke="#FF6B9D" stroke-width="2" fill="none" stroke-linecap="round"/><circle cx="73" cy="181" r="1.8" fill="#FFD166"/><circle cx="87" cy="182" r="1.8" fill="#FFD166"/><circle cx="113" cy="181" r="1.8" fill="#FFD166"/><circle cx="127" cy="182" r="1.8" fill="#FFD166"/>`},
+  // 16 西瓜小帽（帽子）
+  {d:16, cat:'hat',     z:2, zh:'西瓜小帽', en:'Watermelon Cap', box:[50,12,112,56], svg:`<path d="M60 50 C 60 18 140 18 140 50 Z" fill="#7EE081"/><path d="M66 38 C 86 28 114 28 134 38 L 137 48 C 112 37 88 37 63 48 Z" fill="#FF6B6B"/><circle cx="86" cy="27" r="2.4" fill="#2E2E2E"/><circle cx="104" cy="23" r="2.4" fill="#2E2E2E"/><circle cx="118" cy="27" r="2.4" fill="#2E2E2E"/><rect x="56" y="48" width="88" height="9" rx="4.5" fill="#4CAF50" stroke="#3D8B37" stroke-width="1.5"/><path d="M144 50 Q 158 52 156 63" stroke="#4CAF50" stroke-width="7" fill="none" stroke-linecap="round"/>`},
+  // 17 花环头饰（帽子）
+  {d:17, cat:'hat',     z:2, zh:'花环头饰', en:'Flower Crown', box:[64,24,72,32], svg:`<path d="M64 52 Q 100 33 136 52" stroke="#7EE081" stroke-width="4" fill="none"/><circle cx="76" cy="42" r="7" fill="#FF8FAB"/><circle cx="76" cy="42" r="2.8" fill="#FFD166"/><circle cx="100" cy="34" r="8" fill="#FFF"/><circle cx="100" cy="34" r="3" fill="#FFD166"/><circle cx="124" cy="42" r="7" fill="#C9B6FF"/><circle cx="124" cy="42" r="2.8" fill="#FFD166"/><circle cx="88" cy="48" r="5" fill="#8FD6FF"/><circle cx="88" cy="48" r="2" fill="#FFF"/><circle cx="112" cy="48" r="5" fill="#FFD166"/><circle cx="112" cy="48" r="2" fill="#FFF"/>`},
+  // 18 爱心小手表（配饰）
+  {d:18, cat:'acc',     z:3, zh:'爱心小手表', en:'Heart Watch', box:[38,132,28,32], svg:`<rect x="41" y="148" width="21" height="15" rx="5" fill="#FF8FAB" stroke="#E8678C" stroke-width="2"/><path d="M51.5 150.5 L 52.8 154.5 L 56.5 154.5 L 53.5 156.8 L 54.7 160.5 L 51.5 158.3 L 48.3 160.5 L 49.5 156.8 L 46.5 154.5 L 50.2 154.5 Z" fill="#FFF"/><path d="M45 148 Q 43 140 47 136 M58 148 Q 60 140 56 136" stroke="#E8678C" stroke-width="3" fill="none" stroke-linecap="round"/>`},
+  // 19 彩虹毛衣（衣服）
+  {d:19, cat:'clothes', z:1, zh:'彩虹毛衣', en:'Rainbow Sweater', box:[56,115,88,73], svg:`<path d="M66 122 Q 100 135 134 122 L 142 172 Q 100 184 58 172 Z" fill="#FF8FAB"/><path d="M63 138 Q 100 151 137 138 L 138 147 Q 100 159 62 147 Z" fill="#FFD166"/><path d="M61 155 Q 100 167 139 155 L 140 163 Q 100 175 60 163 Z" fill="#8FD6FF"/><path d="M100 119 L 95 128 L 105 128 Z" fill="#7EE081"/>`},
+  // 20 彩虹翅膀（翅膀背包·超级）
+  {d:20, cat:'back',    z:0, zh:'彩虹翅膀', en:'Rainbow Wings', box:[8,106,184,84], svg:`<path d="M58 124 C 26 110 8 132 14 158 C 18 178 36 186 56 180 C 42 170 38 152 46 140 Z" fill="#FF8FAB" fill-opacity=".92" stroke="#E8678C" stroke-width="2" stroke-linejoin="round"/><path d="M142 124 C 174 110 192 132 186 158 C 182 178 164 186 144 180 C 158 170 162 152 154 140 Z" fill="#FF8FAB" fill-opacity=".92" stroke="#E8678C" stroke-width="2" stroke-linejoin="round"/><path d="M50 136 C 32 128 20 140 22 158" stroke="#FFD166" stroke-width="4" fill="none" stroke-linecap="round"/><path d="M150 136 C 168 128 180 140 178 158" stroke="#FFD166" stroke-width="4" fill="none" stroke-linecap="round"/><path d="M48 150 C 38 146 30 152 30 164" stroke="#8FD6FF" stroke-width="4" fill="none" stroke-linecap="round"/><path d="M152 150 C 162 146 170 152 170 164" stroke="#8FD6FF" stroke-width="4" fill="none" stroke-linecap="round"/><circle cx="20" cy="138" r="2.5" fill="#FFD166"/><circle cx="180" cy="138" r="2.5" fill="#FFD166"/><circle cx="16" cy="152" r="2" fill="#C9B6FF"/><circle cx="184" cy="152" r="2" fill="#C9B6FF"/>`},
+  // 21 爱心眼镜（眼镜）
+  {d:21, cat:'glasses', z:3, zh:'爱心眼镜', en:'Heart Glasses', box:[42,66,116,36], svg:`<path d="M76 96 C 64 88 60 80 66 76 C 71 73 75 76 76 79 C 77 76 81 73 86 76 C 92 80 88 88 76 96 Z" fill="#FF8FAB" fill-opacity=".4" stroke="#FF6B9D" stroke-width="3.4" stroke-linejoin="round"/><path d="M124 96 C 112 88 108 80 114 76 C 119 73 123 76 124 79 C 125 76 129 73 134 76 C 140 80 136 88 124 96 Z" fill="#FF8FAB" fill-opacity=".4" stroke="#FF6B9D" stroke-width="3.4" stroke-linejoin="round"/><path d="M92 84 Q 100 78 108 84" stroke="#FF6B9D" stroke-width="3.4" fill="none"/><path d="M60 78 Q 52 76 47 71 M140 78 Q 148 76 153 71" stroke="#FF6B9D" stroke-width="3.4" fill="none" stroke-linecap="round"/>`},
+  // 22 魔法仙女棒（配饰）
+  {d:22, cat:'acc',     z:3, zh:'魔法仙女棒', en:'Magic Wand', box:[152,98,42,68], svg:`<path d="M150 162 L 170 132" stroke="#C9A06A" stroke-width="6" stroke-linecap="round"/><path d="M175 108 L 178 118 L 188 121 L 178 124 L 175 134 L 172 124 L 162 121 L 172 118 Z" fill="#FFD166" stroke="#F0B429" stroke-width="2" stroke-linejoin="round"/><circle cx="163" cy="104" r="3" fill="#FF8FAB"/><circle cx="188" cy="142" r="3" fill="#8FD6FF"/><circle cx="158" cy="126" r="2.4" fill="#C9B6FF"/><path d="M150 118 Q 156 114 154 108" stroke="#FFD166" stroke-width="2.5" fill="none" stroke-linecap="round"/>`},
+  // 23 花朵小书包（翅膀背包）
+  {d:23, cat:'back',    z:0, zh:'花朵小书包', en:'Flower Backpack', box:[22,112,48,64], svg:`<rect x="26" y="132" width="34" height="40" rx="12" fill="#8FD6FF" stroke="#5FB4E0" stroke-width="2.5"/><rect x="34" y="138" width="18" height="10" rx="5" fill="#FFF" opacity=".85"/><circle cx="43" cy="125" r="8" fill="#FF8FAB"/><circle cx="43" cy="125" r="3" fill="#FFD166"/><path d="M30 128 Q 35 116 45 118 M56 128 Q 52 117 45 118" stroke="#5FB4E0" stroke-width="3" fill="none" stroke-linecap="round"/>`},
+  // 24 蓝色小皮鞋（鞋子）
+  {d:24, cat:'shoes',   z:1, zh:'蓝色小皮鞋', en:'Blue Mary Janes', box:[60,177,80,22], svg:`<ellipse cx="80" cy="189" rx="16" ry="8" fill="#6EC1FF" stroke="#4AA8E8" stroke-width="2"/><ellipse cx="120" cy="189" rx="16" ry="8" fill="#6EC1FF" stroke="#4AA8E8" stroke-width="2"/><path d="M68 184 Q 80 179 92 184 M108 184 Q 120 179 132 184" stroke="#FFF" stroke-width="2.5" fill="none" stroke-linecap="round"/><rect x="70" y="182" width="20" height="4" rx="2" fill="#FFD166"/><rect x="110" y="182" width="20" height="4" rx="2" fill="#FFD166"/>`},
+  // 25 星星公主裙（衣服·超级）
+  {d:25, cat:'clothes', z:1, zh:'星星公主裙', en:'Star Princess Dress', box:[48,114,104,80], svg:`<path d="M68 122 L 132 122 L 150 178 Q 100 190 50 178 Z" fill="#C9B6FF"/><path d="M68 122 Q 100 135 132 122 L 130 131 Q 100 143 70 131 Z" fill="#E6DBF7"/><path d="M100 118 L 95 127 L 105 127 Z" fill="#FFD166"/><circle cx="84" cy="148" r="3.4" fill="#FFD166"/><circle cx="110" cy="154" r="3.4" fill="#FFD166"/><circle cx="92" cy="168" r="3.4" fill="#FFD166"/><circle cx="120" cy="170" r="2.8" fill="#FFD166"/><circle cx="72" cy="162" r="2.8" fill="#FFD166"/><path d="M84 144.6 L 85 148.6 L 89 149 L 86 151.4 L 87 155.4 L 84 153.2 L 81 155.4 L 82 151.4 L 79 149 L 83 148.6 Z" fill="#FFF"/>`},
+  // 26 小云朵帽子（帽子）
+  {d:26, cat:'hat',     z:2, zh:'小云朵帽子', en:'Cloud Hat', box:[58,14,90,40], svg:`<ellipse cx="82" cy="38" rx="20" ry="13" fill="#FFF" stroke="#D9E8FF" stroke-width="2.5"/><ellipse cx="106" cy="31" rx="24" ry="15" fill="#FFF" stroke="#D9E8FF" stroke-width="2.5"/><ellipse cx="127" cy="40" rx="16" ry="11" fill="#FFF" stroke="#D9E8FF" stroke-width="2.5"/><circle cx="98" cy="25" r="2.6" fill="#FFD166"/><circle cx="120" cy="33" r="2" fill="#8FD6FF"/><circle cx="88" cy="36" r="1.8" fill="#D9E8FF"/>`},
+  // 27 粉红小领结（衣服）
+  {d:27, cat:'clothes', z:1, zh:'粉红小领结', en:'Pink Bow Tie', box:[79,128,42,28], svg:`<path d="M100 138 L 83 130 L 83 152 Z" fill="#FF6B9D"/><path d="M100 138 L 117 130 L 117 152 Z" fill="#FF6B9D"/><circle cx="100" cy="140" r="6" fill="#FF8FAB"/><circle cx="98" cy="138" r="1.8" fill="#FFD1DE"/>`},
+  // 28 彩虹小手环（配饰）
+  {d:28, cat:'acc',     z:3, zh:'彩虹小手环', en:'Rainbow Bracelet', box:[36,156,24,24], svg:`<circle cx="48" cy="168" r="9" fill="none" stroke="#FF8FAB" stroke-width="5"/><circle cx="48" cy="168" r="9" fill="none" stroke="#FFD166" stroke-width="5" stroke-dasharray="17 39.5" transform="rotate(120 48 168)"/><circle cx="48" cy="168" r="9" fill="none" stroke="#8FD6FF" stroke-width="5" stroke-dasharray="17 39.5" transform="rotate(240 48 168)"/>`},
+  // 29 猫耳发箍（帽子）
+  {d:29, cat:'hat',     z:2, zh:'猫耳发箍', en:'Cat Ear Headband', box:[60,16,80,38], svg:`<path d="M70 46 L 65 20 L 90 34 Z" fill="#FFC2D6" stroke="#F2A3BD" stroke-width="2" stroke-linejoin="round"/><path d="M130 46 L 135 20 L 110 34 Z" fill="#FFC2D6" stroke="#F2A3BD" stroke-width="2" stroke-linejoin="round"/><path d="M72 38 L 69 26 L 82 33 Z" fill="#FF8FAB"/><path d="M128 38 L 131 26 L 118 33 Z" fill="#FF8FAB"/><path d="M64 48 Q 100 32 136 48" stroke="#F2A3BD" stroke-width="4" fill="none" stroke-linecap="round"/>`},
+  // 30 冠军金牌（配饰·超级）
+  {d:30, cat:'acc',     z:3, zh:'冠军金牌', en:'Champion Medal', box:[78,118,44,48], svg:`<path d="M84 122 L 96 142 M116 122 L 104 142" stroke="#FF6B9D" stroke-width="4" stroke-linecap="round"/><circle cx="100" cy="150" r="13" fill="#FFD166" stroke="#F0B429" stroke-width="3"/><path d="M100 142 L 102.4 147 L 108 147.6 L 103.8 151.2 L 105 156.6 L 100 153.6 L 95 156.6 L 96.2 151.2 L 92 147.6 L 97.6 147 Z" fill="#FFF3C4"/><circle cx="93" cy="144" r="1.6" fill="#FFF"/><circle cx="107" cy="156" r="1.6" fill="#FFF"/>`}
+];
+function itemIcon(d){
+  const it = ITEMS[d-1];
+  return `<svg viewBox="${it.box[0]} ${it.box[1]} ${it.box[2]} ${it.box[3]}" class="stk" xmlns="http://www.w3.org/2000/svg">${it.svg}</svg>`;
+}
+const CAT_LABEL = {hat:'帽子',clothes:'衣服',glasses:'眼镜',shoes:'鞋子',back:'翅膀背包',acc:'配饰'};
+const CAT_EN    = {hat:'Hat',clothes:'Outfit',glasses:'Glasses',shoes:'Shoes',back:'Wings/Bag',acc:'Accessory'};
+const root = document.getElementById('root');
+const byCat = {};
+CAT_META.forEach(([id])=>byCat[id]={label:CAT_LABEL[id],en:CAT_EN[id],items:[]});
+ITEMS.forEach(it=>byCat[it.cat].items.push(it));
+CAT_META.forEach(([id])=>{
+  const sec = byCat[id];
+  const el = document.createElement('div'); el.className='sec';
+  el.innerHTML = '<div class="sec-title">' + sec.label + '<span class="en">' + sec.en + '</span></div>';
+  const grid = document.createElement('div'); grid.className='grid';
+  sec.items.forEach(it=>{
+    const sp = [5,10,15,20,25,30].includes(it.d);
+    const div = document.createElement('div');
+    div.className = 'slot' + (sp?' special':'');
+    div.dataset.cat = it.cat;
+    div.innerHTML =
+      '<span class="cat">' + sec.label + '</span>' +
+      (sp?'<span class="badge">✨超级 Super</span>':'') +
+      '<div class="art">' + itemIcon(it.d) + '</div>' +
+      '<div class="nm">' + it.zh + '</div>' +
+      '<div class="day">Day ' + it.d + ' · ' + it.en + '</div>';
+    grid.appendChild(div);
+  });
+  el.appendChild(grid);
+  root.appendChild(el);
+});
+</script>
+</body>
+</html>
