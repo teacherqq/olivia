@@ -127,6 +127,7 @@
   .act.m-zhuyin:hover:before{background:linear-gradient(225deg,#FDEBF8 50%,transparent 50%);}
   .act.m-chinese:hover:before{background:linear-gradient(225deg,#ECF3FE 50%,transparent 50%);}
   .act.m-brain:hover:before{background:linear-gradient(225deg,#EAFBF3 50%,transparent 50%);}
+  .act.m-dictation:hover:before{background:linear-gradient(225deg,#FCE7F3 50%,transparent 50%);}
   /* 課堂卡：更轻的次要处理 */
   .act.m-chinese{border-style:dashed;background:#FEFBFF;}
 
@@ -215,8 +216,8 @@
       <span class="en">Olivia's Learning World</span>
     </div>
     <div class="tb-right">
-      已收錄 <b>4</b> 個學習網站<br>
-      4 learning sites inside
+      已收錄 <b>5</b> 個學習網站<br>
+      5 learning sites inside
     </div>
   </div>
 
@@ -375,6 +376,45 @@
       </div>
       <div class="act-foot">
         <div class="cta">進入單元一<span class="en">Enter</span></div>
+      </div>
+    </a>
+
+    <!-- 三年級中文單元二聽寫 -->
+    <a class="act m-dictation rise" href="https://teacherqq.github.io/olivia/dictation-fables/" target="_blank" rel="noopener">
+      <div class="act-top">
+        <div class="act-icon">
+          <svg viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="單元二聽寫">
+            <ellipse cx="48" cy="52" rx="35" ry="32" fill="#FBCFE8" opacity=".55" filter="url(#washRough)"/>
+            <ellipse cx="44" cy="46" rx="30" ry="27" fill="#F472B6" opacity=".18" filter="url(#washSoft)"/>
+            <rect x="25" y="25" width="46" height="46" rx="3" fill="#FFFCFE" stroke="#8A78A8" stroke-width="1.8"/>
+            <g stroke="#F5C6E4" stroke-width="1.1" stroke-dasharray="3.5 3.5">
+              <line x1="48" y1="26" x2="48" y2="70"/>
+              <line x1="26" y1="48" x2="70" y2="48"/>
+            </g>
+            <text x="48" y="66" text-anchor="middle" font-size="30" fill="#BE185D">二</text>
+            <path d="M70 22 l1.5 3.8 3.8 1.5 -3.8 1.5 -1.5 3.8 -1.5 -3.8 -3.8 -1.5 3.8 -1.5 z" fill="#F9A8D4" opacity=".9"/>
+            <circle cx="22" cy="27" r="2.2" fill="#F9A8D4" opacity=".7"/>
+          </svg>
+        </div>
+        <div>
+          <span class="chip">課 堂</span>
+          <h3>單元二聽寫
+            <span class="en">Grade 3 Chinese · Unit Two Dictation</span>
+          </h3>
+        </div>
+      </div>
+      <div class="act-desc">
+        三年級中文單元二：看拼音寫詞語、看詞語寫拼音、句子聽寫。楷體大字、真人語音朗讀、逐字筆順展示，還能切換成全屏聽寫模式。
+        <span class="en">Unit Two dictation — write words from pinyin, write pinyin for words, and two sentence dictations. Kaiti type, real-voice audio, stroke-order demo and a fullscreen dictation mode.</span>
+      </div>
+      <div class="tags">
+        <span class="tag">✍️ 楷體筆順</span>
+        <span class="tag">🔊 真人語音</span>
+        <span class="tag">🎧 聽寫模式</span>
+        <span class="tag">📝 句子聽寫</span>
+      </div>
+      <div class="act-foot">
+        <div class="cta">開始聽寫<span class="en">Enter</span></div>
       </div>
     </a>
 
@@ -668,7 +708,9 @@ const SITES = {
   chinese: { name:'單元一學習重點', url:'https://teacherqq.github.io/olivia/grade3-chinese-unit1/',
              zh:'看看田字格的筆畫動畫，練一練詞語。', en:'Watch stroke animations and practise the words.' },
   brain:   { name:'記憶加工島', url:'https://teacherqq.github.io/olivia/brain-island/',
-             zh:'玩兩個小遊戲，練練記憶和專注力吧。', en:'Play a couple of games to train memory and focus.' }
+             zh:'玩兩個小遊戲，練練記憶和專注力吧。', en:'Play a couple of games to train memory and focus.' },
+  dictation: { name:'單元二聽寫', url:'https://teacherqq.github.io/olivia/dictation-fables/',
+             zh:'聽一聽真人語音，把詞語和句子寫下來吧。', en:'Listen to the real-voice audio and write down the words and sentences.' }
 };
 
 /* =========================================================
@@ -737,7 +779,7 @@ function renderHero(){
   }
 
   const stats = document.getElementById('heroStats');
-  const items = ['<div class="stat">📚 四個學習網站</div>'];
+  const items = ['<div class="stat">📚 五個學習網站</div>'];
   if(p){
     items.push(`<div class="stat">🗺️ 第 <b>${p.day > 30 ? 30 : p.day}</b> 天</div>`);
     items.push(`<div class="stat">⭐ <b>${p.stars}</b> 顆星</div>`);
