@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23f472b6'/><text x='50' y='72' font-size='60' text-anchor='middle'>🐰</text></svg>">
+<title>🐰 單元二聽寫 · 亡羊補牢 &amp; 守株待兔</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth;font-size:19px}
+  body{font-family:"DFKai-SB","BiauKai","Kaiti TC","STKaiti","Kaiti SC","KaiTi","楷体",serif;background:linear-gradient(160deg,#fff5f7 0%,#fdf4ff 40%,#f0f9ff 100%);color:#1e293b;line-height:1.7;min-height:100vh}
+  nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:3px solid #fbcfe8;padding:10px 18px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  .logo{font-size:1.5rem;font-weight:900;white-space:nowrap}
+  .logo small{color:#94a3b8;font-weight:700;font-size:.85rem;display:block;line-height:1.1}
+  #dictBtn{margin-left:auto;border:none;cursor:pointer;font-family:inherit;font-weight:900;font-size:1.2rem;color:#fff;background:linear-gradient(135deg,#ec4899,#f43f5e);border-radius:999px;padding:10px 22px;box-shadow:0 6px 16px rgba(236,72,153,.4);transition:.15s;white-space:nowrap}
+  #dictBtn:hover{transform:scale(1.05)}
+  main{max-width:1080px;margin:0 auto;padding:22px 18px 60px}
+  .sec{background:#fff;border:3px solid #fbcfe8;border-radius:26px;padding:20px 22px;margin-bottom:26px;box-shadow:0 10px 30px rgba(236,72,153,.08)}
+  .sec-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:6px}
+  .sec-head h2{font-size:1.6rem;font-weight:900;color:#be185d;word-break:keep-all}
+  .sec-head .en{font-size:.95rem;color:#94a3b8;font-weight:700}
+  .sec-desc{font-size:1.05rem;color:#64748b;margin-bottom:14px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:16px}
+  .wcard{position:relative;background:linear-gradient(160deg,#fff,#fdf2f8);border:3px solid #f9a8d4;border-radius:20px;padding:14px 10px 12px;text-align:center;transition:.15s}
+  .wcard:hover{transform:translateY(-3px);box-shadow:0 8px 18px rgba(236,72,153,.15)}
+  .wcard .num{position:absolute;top:-10px;left:-8px;background:#ec4899;color:#fff;font-weight:900;font-size:.85rem;border-radius:999px;padding:2px 9px;box-shadow:0 3px 8px rgba(236,72,153,.4)}
+  .wcard .py{font-size:1.75rem;font-weight:900;color:#7c3aed;letter-spacing:.5px;min-height:2.2rem;display:flex;align-items:center;justify-content:center;line-height:1.15}
+  .wcard .word{font-size:2.1rem;font-weight:900;color:#0f172a;line-height:1.2}
+  .wcard .ans{margin-top:4px;min-height:2.6rem;display:flex;align-items:center;justify-content:center}
+  .wcard .ans .hidden-ans{color:#cbd5e1;font-weight:900;letter-spacing:6px}
+  .wcard .ans .show-ans{font-size:2rem;font-weight:900;color:#0f172a;animation:pop .35s}
+  .wcard .ans .show-py{font-size:1.45rem;font-weight:900;color:#7c3aed;animation:pop .35s}
+  @keyframes pop{0%{transform:scale(.6)}60%{transform:scale(1.15)}100%{transform:scale(1)}}
+  .wcard .btns{display:flex;gap:6px;justify-content:center;margin-top:8px}
+  .wcard .btns button{border:none;cursor:pointer;font-family:inherit;font-size:1.2rem;border-radius:12px;padding:6px 10px;background:#fff;border:2px solid #fbcfe8;transition:.12s}
+  .wcard .btns button:hover{background:#fdf2f8;transform:scale(1.1)}
+  .wcard.done{border-color:#86efac;background:linear-gradient(160deg,#fff,#f0fdf4)}
+  .wcard.done .okmark{background:#dcfce7 !important;border-color:#4ade80 !important}
+  /* 句子 */
+  .sent{background:linear-gradient(160deg,#fff,#fefce8);border:3px solid #fde68a;border-radius:20px;padding:16px 18px;margin-bottom:14px}
+  .sent .num{display:inline-block;background:#f59e0b;color:#fff;font-weight:900;border-radius:999px;padding:2px 12px;font-size:.95rem;margin-bottom:8px}
+  .sent .py{font-size:1.3rem;font-weight:800;color:#7c3aed;line-height:1.7;word-break:break-word}
+  .sent .ans{margin-top:10px;min-height:2.2rem}
+  .sent .ans .hidden-ans{color:#cbd5e1;font-weight:900;letter-spacing:4px;font-size:1.25rem}
+  .sent .ans .show{font-size:1.75rem;font-weight:900;color:#0f172a;line-height:1.7;animation:pop .35s}
+  .sent .btns{display:flex;gap:8px;margin-top:10px}
+  .sent .btns button{border:2px solid #fde68a;background:#fff;cursor:pointer;font-family:inherit;font-weight:800;font-size:1.1rem;color:#92400e;border-radius:999px;padding:7px 16px;transition:.12s}
+  .sent .btns button:hover{background:#fef3c7;transform:scale(1.04)}
+  /* 全屏 overlay 通用 */
+  .overlay{position:fixed;inset:0;z-index:2000;background:linear-gradient(160deg,#fff5f7,#f0f9ff);display:none;flex-direction:column}
+  .overlay.open{display:flex}
+  .ov-head{display:flex;align-items:center;gap:12px;padding:12px 18px;border-bottom:3px solid #fbcfe8;background:rgba(255,255,255,.9)}
+  .ov-head .title{font-size:1.4rem;font-weight:900;color:#be185d}
+  .ov-close{margin-left:auto;border:none;cursor:pointer;font-family:inherit;font-weight:900;font-size:1.15rem;background:#fff;border:2px solid #fbcfe8;border-radius:999px;padding:7px 16px;color:#be185d}
+  .ov-body{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px;gap:14px;overflow:auto}
+  /* 聽寫模式 */
+  #dtProg{font-size:1.2rem;font-weight:900;color:#94a3b8}
+  #dtBadge{background:#ec4899;color:#fff;font-weight:900;border-radius:999px;padding:4px 16px;font-size:1.1rem}
+  #dtBig{font-size:5rem;font-weight:900;color:#0f172a;line-height:1.15;text-align:center;min-height:5.4rem;animation:pop .35s}
+  #dtPy{font-size:1.95rem;font-weight:900;color:#7c3aed;min-height:2rem;text-align:center}
+  #dtHint{color:#94a3b8;font-weight:800;font-size:1.15rem}
+  .dt-controls{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+  .dt-controls button{border:none;cursor:pointer;font-family:inherit;font-weight:900;font-size:1.25rem;border-radius:999px;padding:12px 24px;transition:.12s;color:#fff}
+  .dt-controls button:hover{transform:scale(1.05)}
+  #dtPlay{background:linear-gradient(135deg,#8b5cf6,#6366f1);box-shadow:0 6px 16px rgba(139,92,246,.4)}
+  #dtShow{background:linear-gradient(135deg,#f59e0b,#f97316);box-shadow:0 6px 16px rgba(245,158,11,.4)}
+  #dtNext{background:linear-gradient(135deg,#10b981,#059669);box-shadow:0 6px 16px rgba(16,185,129,.4)}
+  #dtStartBtns{display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
+  .mode-sel{display:flex;background:#fff;border:3px solid #fbcfe8;border-radius:999px;overflow:hidden}
+  .mode-sel button{border:none;background:none;font-family:inherit;font-weight:900;font-size:1.15rem;padding:9px 20px;cursor:pointer;color:#be185d}
+  .mode-sel button.on{background:#ec4899;color:#fff}
+  /* 筆順 */
+  #stWord{font-size:1.75rem;font-weight:900;color:#0f172a}
+  #stHost{width:min(62vmin,480px);height:min(62vmin,480px);position:relative;background:#fff;border:4px solid #cbd5e1;border-radius:18px;cursor:pointer;box-shadow:inset 0 0 0 1px #e2e8f0}
+  #stHost::before,#stHost::after{content:"";position:absolute;background:transparent;border:0}
+  #stHost .grid-bg{position:absolute;inset:0;border-radius:14px}
+  #stHost .grid-bg::before{content:"";position:absolute;left:50%;top:3%;bottom:3%;border-left:3px dashed #fde68a}
+  #stHost .grid-bg::after{content:"";position:absolute;top:50%;left:3%;right:3%;border-top:3px dashed #fde68a}
+  #stHost svg{position:absolute;inset:0}
+  #stPos{font-size:1.15rem;font-weight:900;color:#64748b}
+  .st-nav{display:flex;gap:10px;align-items:center}
+  .st-nav button{border:2px solid #fbcfe8;background:#fff;cursor:pointer;font-family:inherit;font-weight:900;font-size:1.6rem;border-radius:14px;padding:8px 18px;color:#be185d}
+  .st-nav button:disabled{opacity:.35;cursor:default}
+  #stReplay{border:none;cursor:pointer;font-family:inherit;font-weight:900;font-size:1.2rem;color:#fff;background:linear-gradient(135deg,#8b5cf6,#6366f1);border-radius:999px;padding:10px 22px}
+  footer{text-align:center;color:#94a3b8;font-weight:700;font-size:.95rem;padding:10px}
+  @media (max-width:640px){ .wcard .py{font-size:1.45rem} #dtBig{font-size:3.6rem} }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">🐰 單元二聽寫<small>亡羊補牢 · 守株待兔 · 三年級中文</small></div>
+  <button id="dictBtn">🎧 開始聽寫</button>
+</nav>
+
+<main>
+  <!-- A 組 -->
+  <section class="sec" id="secA">
+    <div class="sec-head"><h2>✏️ A組 · 看拼音寫詞語</h2><span class="en">Read pinyin → write the word</span></div>
+    <p class="sec-desc">先看拼音，把詞語寫在紙上或聽寫本上，再按 👁 核對答案。寫對了就按 ✓ 收進花園！<br>Look at the pinyin, write the word, then tap 👁 to check. Tap ✓ if you got it right!</p>
+    <div class="grid" id="gridA"></div>
+  </section>
+
+  <!-- B 組 -->
+  <section class="sec" id="secB">
+    <div class="sec-head"><h2>🔤 B組 · 看詞語寫拼音</h2><span class="en">Read the word → write the pinyin</span></div>
+    <p class="sec-desc">看詞語，把拼音寫下來（記得標聲調！），再按 👁 核對。<br>Write the pinyin (don't forget the tones!), then tap 👁 to check.</p>
+    <div class="grid" id="gridB"></div>
+  </section>
+
+  <!-- 句子 -->
+  <section class="sec" id="secS">
+    <div class="sec-head"><h2>📝 句子聽寫 · 看拼音寫句子</h2><span class="en">Sentence dictation — write from pinyin</span></div>
+    <p class="sec-desc">看拼音把句子寫下來，可以按 🔊 聽朗讀，寫完按 👁 核對。<br>Write the sentence from the pinyin. Tap 🔊 to hear it read aloud, 👁 to check.</p>
+    <div id="sentList"></div>
+  </section>
+</main>
+
+<footer>為 🐰 Olivia 製作 · 寫完記得給媽媽看！</footer>
+
+<!-- 聽寫模式 overlay -->
+<div class="overlay" id="dtOverlay">
+  <div class="ov-head"><span class="title">🎧 聽寫模式</span><span id="dtProg"></span><button class="ov-close" id="dtClose">✕ 結束</button></div>
+  <div class="ov-body">
+    <span id="dtBadge"></span>
+    <div id="dtBig">準備好了嗎？</div>
+    <div id="dtPy"></div>
+    <div id="dtHint">聽到詞語後，寫在聽寫本上，再點「顯示答案」核對</div>
+    <div class="dt-controls">
+      <button id="dtPlay">🔊 再聽一次</button>
+      <button id="dtShow">👁 顯示答案</button>
+      <button id="dtNext">⏭ 下一個</button>
+    </div>
+  </div>
+</div>
+
+<!-- 筆順 overlay -->
+<div class="overlay" id="stOverlay">
+  <div class="ov-head"><span class="title">✍ 筆順展示</span><span id="stWord"></span><button class="ov-close" id="stClose">✕ 關閉</button></div>
+  <div class="ov-body">
+    <div id="stHost"><div class="grid-bg"></div><div id="stWriterHost" style="position:absolute;inset:0"></div></div>
+    <div id="stPos"></div>
+    <div class="st-nav">
+      <button id="stPrev">◀</button>
+      <button id="stReplay">▶ 播放筆順</button>
+      <button id="stNext">▶</button>
+    </div>
+    <div id="stHint" style="color:#94a3b8;font-weight:700">點大格子可以再看一次</div>
+  </div>
+</div>
+
+<script src="hanzi-writer.min.js"></script>
+<script src="char-data.js"></script>
+<script>
+/* ==================== 資料 ==================== */
+const GROUP_A = [
+  ["yuán lái","原來"],["pò le","破了"],["zuān jìn qù","鑽進去"],["lín jū","鄰居"],
+  ["quàn gào","勸告"],["gǎn kuài","趕快"],["xiū yī xiū","修一修"],["diū le","丟了"],
+  ["zhōng yú","終於"],["jiě jué","解決"],["jí shí","及時"],["wèn tí","問題"],
+  ["yè lǐ","夜裏"],["yǎng","養"]
+];
+const GROUP_B = [
+  ["窟窿","kū lóng"],["叼走","diāo zǒu"],["堵上","dǔ shàng"],["狼","láng"],["結結實實","jiē jiē shí shí"]
+];
+const SENTENCES = [
+  ["Yǒu xiē rén xīwàng bù láo ér huò, shì bú huì yǒu hǎo jiéguǒ de.","有些人希望不勞而獲，是不會有好結果的。"],
+  ["Nóngfū kāixīn de xiǎng: duō hǎo de shì a! Wánquán bú fèi lìqì, jiù néng jiǎn dào sǐ tùzi!","農夫開心地想：多好的事啊！完全不費力氣，就能撿到死兔子！"]
+];
+
+/* ==================== 進度 ==================== */
+const SKEY = "olivia_dict_fables_v1";
+let PROG = { ok:{} };
+try{ PROG = JSON.parse(localStorage.getItem(SKEY)) || PROG; }catch(e){}
+function progSave(){ try{ localStorage.setItem(SKEY, JSON.stringify(PROG)); }catch(e){} }
+
+/* ==================== 語音：真人神經語音 mp3 優先 ==================== */
+/* 真人配音（微軟神經語音 zh-TW-HsiaoChenNeural），流式朗讀失敗才回退系統語音 */
+const AUDIO_FOR = {};
+GROUP_A.forEach((w,i)=>{ AUDIO_FOR[w[1]] = "audio/w_A"+i+".mp3"; });
+GROUP_B.forEach((w,i)=>{ AUDIO_FOR[w[0]] = "audio/w_B"+i+".mp3"; });
+const SENT_IDX = {};
+SENTENCES.forEach((s,i)=>{ SENT_IDX[s[1]] = i; });
+AUDIO_FOR["答對了，好棒！"] = "audio/praise.mp3";
+let curAudio = null;
+let voices = [];
+function loadVoices(){ voices = speechSynthesis.getVoices(); }
+loadVoices(); speechSynthesis.onvoiceschanged = loadVoices;
+function ttsSpeak(text, rate){
+  if(!("speechSynthesis" in window)) return;
+  speechSynthesis.cancel();
+  const v = voices.find(v=>/^zh[-_]TW/i.test(v.lang)) || voices.find(v=>/^zh[-_]Hant/i.test(v.lang))
+        || voices.find(v=>/^zh[-_]HK/i.test(v.lang)) || voices.find(v=>/^zh[-_]CN/i.test(v.lang))
+        || voices.find(v=>/Chinese|中文/i.test(v.name));
+  const u = new SpeechSynthesisUtterance(text);
+  if(v) u.voice = v;
+  u.lang = v ? v.lang : "zh-TW";
+  u.rate = rate || 0.8;
+  speechSynthesis.speak(u);
+}
+function speak(text, rate){
+  let file = AUDIO_FOR[text];
+  if(!file && SENT_IDX[text]!==undefined) file = "audio/s"+SENT_IDX[text]+(rate && rate<=0.65 ? "_slow" : "")+".mp3";
+  if(file){
+    if(curAudio){ try{ curAudio.pause(); }catch(e){} }
+    const a = new Audio(file); curAudio = a;
+    a.play().catch(()=>ttsSpeak(text, rate));
+    return;
+  }
+  ttsSpeak(text, rate);
+}
+
+/* ==================== A組 卡片 ==================== */
+document.getElementById("gridA").innerHTML = GROUP_A.map((w,i)=>`
+  <div class="wcard" data-k="A${i}">
+    <span class="num">${i+1}</span>
+    <div class="py">${w[0]}</div>
+    <div class="ans"><span class="hidden-ans">？？？</span></div>
+    <div class="btns">
+      <button class="spk" title="聽發音">🔊</button>
+      <button class="stroke" title="看筆順">✍</button>
+      <button class="reveal" title="顯示答案">👁</button>
+      <button class="okmark" title="我寫對了！">✓</button>
+    </div>
+  </div>`).join("");
+
+/* ==================== B組 卡片 ==================== */
+document.getElementById("gridB").innerHTML = GROUP_B.map((w,i)=>`
+  <div class="wcard" data-k="B${i}">
+    <span class="num">${i+1}</span>
+    <div class="word">${w[0]}</div>
+    <div class="ans"><span class="hidden-ans">？？？</span></div>
+    <div class="btns">
+      <button class="spk" title="聽發音">🔊</button>
+      <button class="stroke" title="看筆順">✍</button>
+      <button class="reveal" title="顯示拼音">👁</button>
+      <button class="okmark" title="我寫對了！">✓</button>
+    </div>
+  </div>`).join("");
+
+/* ==================== 卡片事件 ==================== */
+function cardWord(card){
+  const k = card.dataset.k;
+  return k[0]==="A" ? GROUP_A[+k.slice(1)][1] : GROUP_B[+k.slice(1)][0];
+}
+document.querySelectorAll(".wcard").forEach(card=>{
+  const k = card.dataset.k, isA = k[0]==="A";
+  const item = isA ? GROUP_A[+k.slice(1)] : GROUP_B[+k.slice(1)];
+  const ansEl = card.querySelector(".ans");
+  card.querySelector(".spk").onclick = ()=>speak(cardWord(card));
+  card.querySelector(".reveal").onclick = e=>{
+    const btn = e.currentTarget;
+    if(ansEl.querySelector(".show-ans, .show-py")){
+      ansEl.innerHTML = `<span class="hidden-ans">？？？</span>`;
+      btn.textContent = "👁"; btn.title = "顯示答案";
+    } else {
+      ansEl.innerHTML = isA ? `<span class="show-ans">${item[1]}</span>` : `<span class="show-py">${item[1]}</span>`;
+      btn.textContent = "🙈"; btn.title = "隱藏答案";
+      if(isA) speak(item[1]);
+    }
+  };
+  card.querySelector(".okmark").onclick = e=>{
+    PROG.ok[k] = !PROG.ok[k]; progSave();
+    card.classList.toggle("done", PROG.ok[k]);
+    e.currentTarget.textContent = PROG.ok[k] ? "🌟" : "✓";
+    if(PROG.ok[k]) speak("答對了，好棒！");
+  };
+  card.querySelector(".stroke").onclick = ()=>openStroke(cardWord(card));
+  if(PROG.ok[k]){ card.classList.add("done"); card.querySelector(".okmark").textContent = "🌟"; }
+});
+
+/* ==================== 句子 ==================== */
+document.getElementById("sentList").innerHTML = SENTENCES.map((s,i)=>`
+  <div class="sent">
+    <span class="num">句子 ${i+1}</span>
+    <div class="py">${s[0]}</div>
+    <div class="ans"><span class="hidden-ans">？？？</span></div>
+    <div class="btns">
+      <button class="spk">🔊 聽朗讀</button>
+      <button class="slow">🐢 慢速朗讀</button>
+      <button class="reveal">👁 核對句子</button>
+    </div>
+  </div>`).join("");
+document.querySelectorAll(".sent").forEach((el,i)=>{
+  el.querySelector(".spk").onclick = ()=>speak(SENTENCES[i][1], 0.85);
+  el.querySelector(".slow").onclick = ()=>speak(SENTENCES[i][1], 0.6);
+  el.querySelector(".reveal").onclick = e=>{
+    const btn = e.currentTarget, ans = el.querySelector(".ans");
+    if(ans.querySelector(".show")){
+      ans.innerHTML = `<span class="hidden-ans">？？？</span>`;
+      btn.textContent = "👁 核對句子";
+    } else {
+      ans.innerHTML = `<span class="show">${SENTENCES[i][1]}</span>`;
+      btn.textContent = "🙈 隱藏答案";
+      speak(SENTENCES[i][1], 0.8);
+    }
+  };
+});
+
+/* ==================== 筆順展示 ==================== */
+const stOverlay = document.getElementById("stOverlay");
+let ST = { word:"", chars:[], c:0, writer:null };
+function stSize(){ return document.getElementById("stHost").clientWidth; }
+function stRender(){
+  const ch = ST.chars[ST.c];
+  document.getElementById("stWord").textContent = `「${ST.word}」`;
+  document.getElementById("stPos").textContent = `第 ${ST.c+1} / ${ST.chars.length} 個字 · ${window.CHAR_DATA[ch] ? window.CHAR_DATA[ch].strokes.length+" 畫" : "筆畫資料缺"}`;
+  document.getElementById("stPrev").disabled = ST.c===0;
+  document.getElementById("stNext").disabled = ST.c===ST.chars.length-1;
+  const host = document.getElementById("stWriterHost");
+  host.innerHTML = "";
+  if(window.CHAR_DATA[ch]){
+    ST.writer = HanziWriter.create(host, ch, {
+      width: stSize(), height: stSize(), padding: 12,
+      strokeColor:"#0f172a", outlineColor:"#cbd5e1", radicalColor:"#ea580c",
+      showOutline:true, showCharacter:false, highlightOnComplete:true,
+      charDataLoader:(c,done)=>done(window.CHAR_DATA[c]||null)
+    });
+    ST.writer.hideCharacter();
+    ST.writer.animateCharacter({strokeAnimationSpeed:.8, delayBetweenStrokes:350});
+  } else {
+    host.innerHTML = `<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:14rem;font-weight:900">${ch}</div>`;
+  }
+}
+function openStroke(word){
+  ST.word = word; ST.chars = [...word]; ST.c = 0;
+  stOverlay.classList.add("open");
+  if(document.documentElement.requestFullscreen) document.documentElement.requestFullscreen().catch(()=>{});
+  setTimeout(stRender, 60);
+}
+function closeStroke(){
+  stOverlay.classList.remove("open");
+  if(document.fullscreenElement && document.exitFullscreen) document.exitFullscreen().catch(()=>{});
+}
+document.getElementById("stClose").onclick = closeStroke;
+document.getElementById("stPrev").onclick = ()=>{ if(ST.c>0){ ST.c--; stRender(); } };
+document.getElementById("stNext").onclick = ()=>{ if(ST.c<ST.chars.length-1){ ST.c++; stRender(); } };
+document.getElementById("stReplay").onclick = ()=>{ if(ST.writer){ ST.writer.hideCharacter(); ST.writer.animateCharacter({strokeAnimationSpeed:.8, delayBetweenStrokes:350}); } };
+document.getElementById("stHost").onclick = ()=>{ if(ST.writer){ ST.writer.hideCharacter(); ST.writer.animateCharacter({strokeAnimationSpeed:.8, delayBetweenStrokes:350}); } };
+document.addEventListener("keydown", e=>{
+  if(!stOverlay.classList.contains("open")) return;
+  if(e.key==="Escape") closeStroke();
+  if(e.key==="ArrowLeft") document.getElementById("stPrev").click();
+  if(e.key==="ArrowRight") document.getElementById("stNext").click();
+});
+
+/* ==================== 聽寫模式 ==================== */
+const dtOverlay = document.getElementById("dtOverlay");
+const POOL = [
+  ...GROUP_A.map((w,i)=>({g:"A組 · 看拼音寫詞語", word:w[1], py:w[0], card:"A"+i})),
+  ...GROUP_B.map((w,i)=>({g:"B組 · 寫出拼音", word:w[0], py:w[1], card:"B"+i}))
+];
+let DT = { order:[], idx:-1, random:true, revealed:false };
+function dtShuffle(){
+  DT.order = POOL.map((_,i)=>i);
+  if(DT.random){ for(let i=DT.order.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [DT.order[i],DT.order[j]]=[DT.order[j],DT.order[i]]; } }
+}
+function dtShow(){
+  const it = POOL[DT.order[DT.idx]];
+  DT.revealed = false;
+  document.getElementById("dtProg").textContent = `${DT.idx+1} / ${DT.order.length}`;
+  document.getElementById("dtBadge").textContent = it.g;
+  document.getElementById("dtBig").textContent = "🔊 🖊";
+  document.getElementById("dtPy").textContent = "";
+  document.getElementById("dtHint").textContent = "聽到詞語後，寫在聽寫本上，再點「顯示答案」核對";
+  setTimeout(()=>speak(it.word), 350);
+}
+function dtStart(){
+  dtShuffle(); DT.idx = 0;
+  dtOverlay.classList.add("open");
+  if(document.documentElement.requestFullscreen) document.documentElement.requestFullscreen().catch(()=>{});
+  dtShow();
+}
+function dtNext(){
+  if(DT.idx >= DT.order.length-1){
+    document.getElementById("dtBig").textContent = "🎉 全部聽寫完了！";
+    document.getElementById("dtPy").textContent = "";
+    document.getElementById("dtBadge").textContent = "太棒了！";
+    document.getElementById("dtHint").textContent = "記得把聽寫本拿給媽媽看哦～";
+    document.getElementById("dtProg").textContent = `${DT.order.length} / ${DT.order.length}`;
+    return;
+  }
+  DT.idx++; dtShow();
+}
+document.getElementById("dictBtn").onclick = dtStart;
+document.getElementById("dtClose").onclick = ()=>{
+  dtOverlay.classList.remove("open");
+  if(document.fullscreenElement && document.exitFullscreen) document.exitFullscreen().catch(()=>{});
+};
+document.getElementById("dtPlay").onclick = ()=>speak(POOL[DT.order[DT.idx]].word);
+document.getElementById("dtShow").onclick = ()=>{
+  const it = POOL[DT.order[DT.idx]];
+  DT.revealed = true;
+  document.getElementById("dtBig").textContent = it.word;
+  document.getElementById("dtPy").textContent = it.py;
+  document.getElementById("dtHint").textContent = "寫對了嗎？下一個 ↗";
+  speak(it.word);
+};
+document.getElementById("dtNext").onclick = dtNext;
+document.addEventListener("keydown", e=>{
+  if(!dtOverlay.classList.contains("open")) return;
+  if(e.key==="Escape") document.getElementById("dtClose").click();
+  if(e.key===" "){ e.preventDefault(); document.getElementById("dtPlay").click(); }
+  if(e.key==="ArrowRight") dtNext();
+});
+</script>
+</body>
+</html>
