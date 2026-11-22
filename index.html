@@ -50,7 +50,9 @@
 
   /* ---------- 欢迎区 ---------- */
   .hero{display:flex;align-items:center;gap:28px;margin-top:26px;}
-  .hero-mascot{width:150px;height:150px;flex:0 0 auto;animation:float 5s ease-in-out infinite;}
+  .hero-mascot{width:190px;height:190px;flex:0 0 auto;animation:float 5s ease-in-out infinite;}
+  .hero-mascot img{width:100%;height:100%;object-fit:cover;display:block;border-radius:26px;
+    border:3px solid #fff;box-shadow:0 12px 28px rgba(150,110,215,.22),0 2px 0 var(--hair);}
   .hero-txt{min-width:0;flex:1;}
   .hero-hi{font-size:31px;font-weight:700;letter-spacing:2px;line-height:1.3;}
   .hero-hi .en{font-size:13.5px;letter-spacing:.8px;margin-top:4px;}
@@ -152,7 +154,7 @@
     .app{max-width:1220px;padding:34px 40px 80px;}
     .tb-title{font-size:27px;}
     .hero{gap:36px;margin-top:32px;}
-    .hero-mascot{width:184px;height:184px;}
+    .hero-mascot{width:230px;height:230px;}
     .hero-hi{font-size:37px;}
     .bubble{font-size:18px;padding:16px 22px;}
     .act h3{font-size:23px;}
@@ -162,7 +164,7 @@
   @media (max-width:640px){
     .app{padding:18px 15px 50px;}
     .hero{flex-direction:column;text-align:center;gap:16px;}
-    .hero-mascot{width:124px;height:124px;}
+    .hero-mascot{width:150px;height:150px;}
     .hero-hi{font-size:26px;}
     .bubble{text-align:left;}
     .bubble:before{left:50%;margin-left:-6px;}
@@ -172,9 +174,267 @@
     .rec-go{margin-left:0;width:100%;}
     .tb-right{display:none;}
   }
+
+  /* =========================================================
+     樂園封面 · 夢幻花園
+  ========================================================= */
+  body.cover-open{overflow:hidden;}
+
+  .cover{position:fixed;inset:0;z-index:80;overflow:hidden;isolation:isolate;
+    display:flex;flex-direction:column;
+    background:
+      radial-gradient(120% 82% at 50% -4%, #FFFDFC 0%, #FFF4FB 18%, #FCE8FA 40%, #F0E7FF 66%, #E3F2F3 88%, #DFF3E8 100%);
+    transition:opacity .85s ease, transform 1.05s cubic-bezier(.22,.8,.28,1);}
+  .cover.leave{opacity:0;transform:scale(1.07);pointer-events:none;}
+  .cover::before{content:'';position:absolute;left:-12%;right:-12%;top:-18%;height:66%;
+    pointer-events:none;z-index:0;
+    background:radial-gradient(closest-side at 50% 36%,rgba(255,255,255,.96),rgba(255,240,250,.5) 46%,rgba(255,240,250,0) 76%);}
+
+  .cover-scene{position:absolute;inset:0;width:100%;height:100%;z-index:1;}
+  .cover-fg{position:absolute;left:0;right:0;bottom:0;width:100%;height:min(206px,23vh);
+    z-index:6;pointer-events:none;}
+  .cover-flies{position:absolute;inset:0;z-index:4;pointer-events:none;overflow:hidden;}
+
+  .cover-inner{position:relative;z-index:5;flex:1 1 auto;display:flex;flex-direction:column;
+    align-items:center;padding:clamp(14px,3vh,36px) clamp(16px,3vw,40px) 0;}
+
+  .cover-head{text-align:center;flex:0 0 auto;}
+  .cover-kicker{font-family:var(--serif-en);font-style:italic;font-size:clamp(10px,1.05vw,13px);
+    letter-spacing:.34em;color:#BCA5DA;text-transform:uppercase;}
+  .cover-title{margin-top:.4em;font-size:clamp(25px,4.3vw,49px);font-weight:700;letter-spacing:.13em;
+    color:#6A558F;text-shadow:0 1px 0 #fff,0 3px 0 rgba(255,255,255,.6),0 16px 34px rgba(146,110,200,.22);}
+  .cover-sub{margin-top:.55em;font-size:clamp(11px,1.15vw,14px);letter-spacing:.46em;color:#9C87BE;}
+
+  .cover-stage{flex:1 1 auto;width:100%;max-width:1260px;margin:0 auto;display:flex;
+    align-items:flex-end;justify-content:center;gap:clamp(4px,2.6vw,64px);
+    padding-bottom:clamp(46px,8.4vh,88px);}
+
+  /* 獨角獸 */
+  .uni-slot{position:relative;flex:0 1 auto;width:clamp(228px,34vw,494px);aspect-ratio:1/1;margin-bottom:clamp(-88px,-7vh,-46px);margin-bottom:clamp(-88px,-7vh,-46px);
+    opacity:0;animation:coverUp 1.15s .12s cubic-bezier(.22,.9,.3,1) forwards;}
+  .uni-slot::before{content:'';position:absolute;inset:-6% -8% 0 -8%;border-radius:50%;
+    background:radial-gradient(closest-side,rgba(255,255,255,.9),rgba(255,238,250,.42) 54%,rgba(255,238,250,0) 78%);
+    filter:blur(9px);z-index:-1;}
+  .uni-float{position:absolute;inset:0;animation:float 7s ease-in-out infinite;}
+  .uni-3d{position:absolute;inset:0;transform:perspective(880px) rotateY(var(--ry,0deg)) rotateX(var(--rx,0deg));
+    transform-style:preserve-3d;will-change:transform;}
+  .uni-img{position:absolute;inset:0;width:100%;height:100%;display:block;}
+  .uni-head{-webkit-mask-image:radial-gradient(ellipse 31% 30% at 45% 38%,#000 68%,rgba(0,0,0,0) 100%);
+    mask-image:radial-gradient(ellipse 31% 30% at 45% 38%,#000 68%,rgba(0,0,0,0) 100%);
+    transform-origin:45% 64%;
+    transform:translate3d(var(--hx,0),var(--hy,0),0) rotate(var(--hr,0deg)) scale(1.02);
+    will-change:transform;}
+
+  /* 雲朵小門 */
+  .door-slot{position:relative;flex:0 1 auto;width:clamp(154px,22vw,330px);
+    margin-bottom:clamp(2px,1.4vh,20px);padding:0;border:0;background:none;cursor:pointer;
+    font-family:inherit;opacity:0;animation:coverUp 1.15s .42s cubic-bezier(.22,.9,.3,1) forwards;}
+  .door-slot img{position:relative;z-index:1;width:100%;display:block;
+    transition:transform .35s cubic-bezier(.3,.9,.3,1),filter .35s;
+    filter:drop-shadow(0 18px 28px rgba(150,110,215,.28));}
+  .door-slot:hover img,.door-slot:focus-visible img{transform:translateY(-7px) scale(1.035);
+    filter:drop-shadow(0 26px 38px rgba(150,110,215,.36)) brightness(1.05) saturate(1.04);}
+  .door-slot:focus-visible{outline:none;}
+  .door-glow{position:absolute;inset:-16% -14% -8%;z-index:0;border-radius:50%;
+    background:radial-gradient(closest-side,rgba(255,251,232,.95),rgba(255,235,244,.5) 52%,rgba(255,235,244,0) 78%);
+    animation:breathe 5s ease-in-out infinite;}
+  .door-flash{position:absolute;inset:-24%;z-index:2;border-radius:50%;opacity:0;pointer-events:none;
+    background:radial-gradient(closest-side,#FFFDF4,#FFE9FB 46%,rgba(255,233,251,0) 74%);}
+  .cover.enter .door-flash{animation:doorFlash 1s ease-out forwards;}
+  .door-tag{position:absolute;left:50%;bottom:-4%;transform:translateX(-50%);z-index:3;
+    white-space:nowrap;padding:7px 15px;border-radius:999px;
+    font-size:clamp(11px,1.1vw,13.5px);letter-spacing:.16em;color:#6B5590;
+    background:rgba(255,253,255,.86);border:1px solid rgba(216,199,241,.95);
+    box-shadow:0 7px 18px rgba(150,110,215,.2);
+    -webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);transition:.28s;}
+  .door-slot:hover .door-tag{background:#fff;color:#5A4586;transform:translateX(-50%) translateY(-4px);}
+
+  .cover-hint{position:absolute;left:50%;bottom:clamp(10px,2.1vh,22px);transform:translateX(-50%);z-index:8;
+    display:flex;flex-direction:column;align-items:center;gap:1px;
+    padding:8px 20px 9px;border-radius:999px;max-width:min(92vw,620px);
+    background:rgba(255,253,255,.74);border:1px solid rgba(226,212,246,.8);
+    -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
+    box-shadow:0 8px 22px rgba(150,110,215,.14);
+    text-align:center;font-size:clamp(10.5px,1.05vw,12.5px);
+    letter-spacing:.12em;color:#8B77AC;pointer-events:none;}
+  .cover-hint .en{display:block;font-size:.94em;letter-spacing:.04em;margin-top:2px;color:#A997BF;
+    font-family:var(--serif-en);font-style:italic;}
+
+  /* 蝴蝶 */
+  .bfly{position:absolute;width:clamp(34px,3.8vw,54px);opacity:.92;
+    filter:drop-shadow(0 5px 8px rgba(160,130,200,.22));}
+  .bfly svg{display:block;width:100%;height:auto;overflow:visible;}
+  .bfly .wingL{transform-box:fill-box;transform-origin:100% 50%;animation:flapL .46s ease-in-out infinite alternate;}
+  .bfly .wingR{transform-box:fill-box;transform-origin:0% 50%;animation:flapR .46s ease-in-out infinite alternate;}
+  .bfly.b1{left:7%;top:29%;animation:driftA 27s ease-in-out infinite;}
+  .bfly.b2{right:11%;top:19%;width:clamp(26px,3vw,42px);animation:driftB 33s ease-in-out infinite;}
+
+  /* 螢火蟲 */
+  .firefly{position:absolute;width:6px;height:6px;border-radius:50%;background:#FFF8D2;
+    box-shadow:0 0 9px 3px rgba(255,236,167,.8),0 0 22px 9px rgba(255,214,240,.35);
+    animation:fireflyPulse 4s ease-in-out infinite,fireflyDrift 13s ease-in-out infinite alternate;}
+
+  @keyframes coverUp{from{opacity:0;transform:translateY(22px) scale(.97);}to{opacity:1;transform:none;}}
+  @keyframes breathe{0%,100%{transform:scale(.97);opacity:.85;}50%{transform:scale(1.05);opacity:1;}}
+  @keyframes doorFlash{0%{opacity:0;transform:scale(.7);}32%{opacity:1;}100%{opacity:0;transform:scale(1.55);}}
+  @keyframes fireflyPulse{0%,100%{opacity:.12;}50%{opacity:1;}}
+  @keyframes fireflyDrift{from{translate:0 0;}to{translate:16px -22px;}}
+  @keyframes flapL{from{transform:scaleX(1);}to{transform:scaleX(.78);}}
+  @keyframes flapR{from{transform:scaleX(1);}to{transform:scaleX(.78);}}
+  @keyframes driftA{0%{transform:translate3d(0,0,0) rotate(-6deg);}25%{transform:translate3d(9vw,-4vh,0) rotate(9deg);}
+    50%{transform:translate3d(17vw,3vh,0) rotate(-4deg);}75%{transform:translate3d(7vw,7vh,0) rotate(6deg);}
+    100%{transform:translate3d(0,0,0) rotate(-6deg);}}
+  @keyframes driftB{0%{transform:translate3d(0,0,0) rotate(7deg);}30%{transform:translate3d(-10vw,5vh,0) rotate(-6deg);}
+    60%{transform:translate3d(-16vw,-3vh,0) rotate(8deg);}100%{transform:translate3d(0,0,0) rotate(7deg);}}
+
+  .cover-back{margin-left:16px;font-family:var(--kai);font-size:13px;letter-spacing:1px;color:var(--ink-soft);
+    background:transparent;border:1px solid var(--hair);border-radius:999px;padding:6px 14px;
+    cursor:pointer;transition:.2s;white-space:nowrap;}
+  .cover-back:hover{background:var(--paper-2);border-color:var(--hair-2);color:var(--ink);}
+
+  @media (max-width:760px){
+    .cover-stage{flex-direction:column;align-items:center;justify-content:flex-end;gap:0;padding-bottom:clamp(38px,7vh,70px);}
+    .uni-slot{width:min(72vw,300px);}
+    .door-slot{width:min(48vw,198px);margin:-1vh 0 0 14%;}
+    .cover-sub{letter-spacing:.34em;}
+    .cover-back{font-size:12px;padding:5px 11px;margin-left:10px;}
+    .cover-hint{padding:7px 16px 8px;letter-spacing:.08em;bottom:6px;max-width:88vw;}
+    .cover-hint .en{display:none;}
+  }
+  @media (max-height:560px) and (orientation:landscape){
+    .cover-head{transform:scale(.9);}
+    .uni-slot{width:min(34vw,240px);}
+    .door-slot{width:min(21vw,170px);}
+    .cover-fg{height:120px;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .uni-float,.door-glow,.bfly,.firefly,.act,.hero-mascot,.avatar{animation:none!important;}
+  }
 </style>
 </head>
 <body>
+
+<!-- ===================== 樂園封面 · 夢幻花園 ===================== -->
+<div class="cover" id="cover">
+  <svg class="cover-scene" id="coverScene" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <defs>
+      <linearGradient id="hillFar" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#E8F8EF"/><stop offset="1" stop-color="#C8E8D7"/>
+      </linearGradient>
+      <linearGradient id="hillMid" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#D5EEDD"/><stop offset="1" stop-color="#B8DFC7"/>
+      </linearGradient>
+      <linearGradient id="hillNear" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#E6F7E2"/><stop offset="1" stop-color="#CFEBCF"/>
+      </linearGradient>
+      <radialGradient id="sunGlow" cx="50%" cy="50%" r="50%">
+        <stop offset="0" stop-color="#FFFDF6" stop-opacity=".8"/>
+        <stop offset="46%" stop-color="#FFEFC9" stop-opacity=".34"/>
+        <stop offset="100%" stop-color="#FFE1F2" stop-opacity="0"/>
+      </radialGradient>
+    </defs>
+
+    <ellipse cx="1010" cy="250" rx="340" ry="280" fill="url(#sunGlow)"/>
+    <ellipse cx="250" cy="120" rx="310" ry="225" fill="#FDE6F6" opacity=".5" filter="url(#washBig)"/>
+    <ellipse cx="1280" cy="130" rx="270" ry="205" fill="#E6E1FF" opacity=".45" filter="url(#washBig)"/>
+
+    <path d="M-60 636 C 170 588 330 620 520 600 C 700 582 860 616 1060 596 C 1240 578 1370 602 1500 586 L1500 930 L-60 930 Z"
+          fill="url(#hillFar)" opacity=".95"/>
+    <path d="M-60 698 C 190 660 400 704 620 686 C 840 668 1060 710 1280 688 C 1380 678 1450 684 1500 676 L1500 930 L-60 930 Z"
+          fill="url(#hillMid)"/>
+    <path d="M-60 788 C 220 754 470 796 720 778 C 970 760 1210 800 1500 772 L1500 930 L-60 930 Z"
+          fill="url(#hillNear)"/>
+
+    <!-- 遠處灌木與小樹 -->
+    <g opacity=".9" filter="url(#washSoft)">
+      <ellipse cx="146" cy="716" rx="92" ry="48" fill="#B2DABE"/>
+      <ellipse cx="86" cy="732" rx="58" ry="30" fill="#C0E2C9"/>
+      <ellipse cx="212" cy="736" rx="66" ry="30" fill="#C8E6CE"/>
+      <ellipse cx="1300" cy="722" rx="96" ry="46" fill="#B2DABE"/>
+      <ellipse cx="1382" cy="736" rx="66" ry="30" fill="#C8E6CE"/>
+      <ellipse cx="1242" cy="738" rx="58" ry="28" fill="#C0E2C9"/>
+    </g>
+    <g opacity=".7">
+      <circle cx="118" cy="706" r="3.4" fill="#FFFDFF"/>
+      <circle cx="168" cy="694" r="2.8" fill="#FBD3E8"/>
+      <circle cx="196" cy="712" r="2.4" fill="#FFFDFF"/>
+      <circle cx="1308" cy="702" r="3.2" fill="#FFFDFF"/>
+      <circle cx="1268" cy="716" r="2.4" fill="#FBD3E8"/>
+      <circle cx="1360" cy="716" r="2.6" fill="#FFFDFF"/>
+    </g>
+    <g id="coverSprinkles" opacity=".8"></g>
+  </svg>
+
+  <div class="cover-flies" id="coverFlies" aria-hidden="true">
+    <div class="bfly b1">
+      <svg viewBox="0 0 40 30" aria-hidden="true">
+        <g class="wingL">
+          <ellipse cx="11" cy="9.5" rx="9" ry="6.6" transform="rotate(-22 11 9.5)" fill="#F2A8D3" stroke="#E58CBE" stroke-width=".7"/>
+          <ellipse cx="12" cy="19.5" rx="6.6" ry="5.4" transform="rotate(16 12 19.5)" fill="#F8C3DF" stroke="#E58CBE" stroke-width=".7"/>
+        </g>
+        <g class="wingR">
+          <ellipse cx="29" cy="9.5" rx="9" ry="6.6" transform="rotate(22 29 9.5)" fill="#B79CF3" stroke="#9F80E4" stroke-width=".7"/>
+          <ellipse cx="28" cy="19.5" rx="6.6" ry="5.4" transform="rotate(-16 28 19.5)" fill="#CBB6F7" stroke="#9F80E4" stroke-width=".7"/>
+        </g>
+        <ellipse cx="20" cy="15" rx="1.9" ry="7.6" fill="#5E4B84"/>
+        <path d="M18.8 7.6 C 17.4 5.4 16 4.4 14.6 4" stroke="#5E4B84" stroke-width=".8" fill="none" stroke-linecap="round"/>
+        <path d="M21.2 7.6 C 22.6 5.4 24 4.4 25.4 4" stroke="#5E4B84" stroke-width=".8" fill="none" stroke-linecap="round"/>
+        <circle cx="9.6" cy="7.6" r="1.2" fill="#FFFFFF" opacity=".85"/>
+        <circle cx="30.4" cy="7.6" r="1.2" fill="#FFFFFF" opacity=".85"/>
+      </svg>
+    </div>
+    <div class="bfly b2">
+      <svg viewBox="0 0 40 30" aria-hidden="true">
+        <g class="wingL">
+          <ellipse cx="11" cy="9.5" rx="9" ry="6.6" transform="rotate(-22 11 9.5)" fill="#BCD7FA" stroke="#94B9EA" stroke-width=".7"/>
+          <ellipse cx="12" cy="19.5" rx="6.6" ry="5.4" transform="rotate(16 12 19.5)" fill="#D5E6FD" stroke="#94B9EA" stroke-width=".7"/>
+        </g>
+        <g class="wingR">
+          <ellipse cx="29" cy="9.5" rx="9" ry="6.6" transform="rotate(22 29 9.5)" fill="#F7B4D8" stroke="#E58CBE" stroke-width=".7"/>
+          <ellipse cx="28" cy="19.5" rx="6.6" ry="5.4" transform="rotate(-16 28 19.5)" fill="#FBCDE4" stroke="#E58CBE" stroke-width=".7"/>
+        </g>
+        <ellipse cx="20" cy="15" rx="1.9" ry="7.6" fill="#5E4B84"/>
+        <path d="M18.8 7.6 C 17.4 5.4 16 4.4 14.6 4" stroke="#5E4B84" stroke-width=".8" fill="none" stroke-linecap="round"/>
+        <path d="M21.2 7.6 C 22.6 5.4 24 4.4 25.4 4" stroke="#5E4B84" stroke-width=".8" fill="none" stroke-linecap="round"/>
+        <circle cx="9.6" cy="7.6" r="1.2" fill="#FFFFFF" opacity=".85"/>
+        <circle cx="30.4" cy="7.6" r="1.2" fill="#FFFFFF" opacity=".85"/>
+      </svg>
+    </div>
+  </div>
+
+  <svg class="cover-fg" id="coverFG" viewBox="0 0 1440 240" preserveAspectRatio="xMidYMax slice" aria-hidden="true"></svg>
+
+  <div class="cover-inner">
+    <div class="cover-head">
+      <div class="cover-kicker">Olivia&rsquo;s Secret Garden</div>
+      <h1 class="cover-title">Olivia 的學習樂園</h1>
+      <div class="cover-sub">夢 幻 花 園</div>
+    </div>
+
+    <div class="cover-stage">
+      <div class="uni-slot" id="uniSlot">
+        <div class="uni-float">
+          <div class="uni-3d" id="uni3d">
+            <img class="uni-img" src="assets/luna-unicorn-cover.webp" alt="獨角獸露娜 Luna the unicorn" decoding="async">
+            <img class="uni-img uni-head" id="uniHead" src="assets/luna-unicorn-cover.webp" alt="" aria-hidden="true" decoding="async">
+          </div>
+        </div>
+      </div>
+
+      <button class="door-slot" id="doorSlot" type="button" aria-label="點擊雲朵小門，進入學習樂園">
+        <span class="door-glow" aria-hidden="true"></span>
+        <span class="door-flash" aria-hidden="true"></span>
+        <img src="assets/cloud-door.webp" alt="" decoding="async">
+        <span class="door-tag">✦ 進入樂園 ✦</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="cover-hint">
+    移動滑鼠，露娜會轉頭看你　·　點擊雲朵小門，走進花園
+    <span class="en">Move your mouse — Luna will follow. Click the cloud door to come in.</span>
+  </div>
+</div>
 
 <!-- 全局滤镜与渐变（水彩毛边） -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -219,11 +479,12 @@
       已收錄 <b>5</b> 個學習網站<br>
       5 learning sites inside
     </div>
+    <button class="cover-back" id="backCover" type="button">回到封面</button>
   </div>
 
   <!-- 欢迎区 -->
   <div class="hero rise">
-    <div class="hero-mascot" id="heroMascot"></div>
+    <div class="hero-mascot" id="heroMascot"><img src="assets/luna-unicorn.webp" alt="獨角獸露娜 Luna the unicorn" decoding="async"></div>
     <div class="hero-txt">
       <div class="hero-hi" id="heroHi">你好，Olivia
         <span class="en">Hello, Olivia</span>
@@ -751,7 +1012,6 @@ function greeting(){
 ========================================================= */
 function renderHero(){
   document.getElementById('topMascot').innerHTML = unicorn('idle');
-  document.getElementById('heroMascot').innerHTML = unicorn('idle');
 
   const g = greeting();
   document.getElementById('heroHi').innerHTML =
@@ -864,6 +1124,170 @@ renderRec();
 document.querySelectorAll('.act').forEach(function(el, i){
   el.style.animationDelay = (i * 110 + 140) + 'ms';
 });
+
+/* =========================================================
+   封面 · 夢幻花園：花草、螢火蟲
+========================================================= */
+(function plantGarden(){
+  const NS = 'http://www.w3.org/2000/svg';
+  const fg = document.getElementById('coverFG');
+  if(!fg) return;
+  const mk = function(n, a){
+    const e = document.createElementNS(NS, n);
+    for(const k in a) e.setAttribute(k, a[k]);
+    return e;
+  };
+  let s = 20261122;
+  const rnd = function(){ s = (s * 1103515245 + 12345) % 2147483648; return s / 2147483648; };
+  const pick = function(a){ return a[Math.floor(rnd() * a.length)]; };
+
+  /* 草叢 */
+  const grass = mk('g', {});
+  for(let i = 0; i < 170; i++){
+    const x = rnd() * 1500 - 30, h = 16 + rnd() * 52, lean = (rnd() - .5) * 28;
+    grass.appendChild(mk('path', {
+      d: `M${x.toFixed(1)} 252 C ${(x + lean * .35).toFixed(1)} ${(252 - h * .5).toFixed(1)} ${(x + lean * .8).toFixed(1)} ${(252 - h * .8).toFixed(1)} ${(x + lean).toFixed(1)} ${(252 - h).toFixed(1)}`,
+      fill: 'none', stroke: pick(['#9CCBA7', '#8CC09A', '#B2D9B7', '#A5D1AB']),
+      'stroke-width': (1.2 + rnd() * 1.6).toFixed(2), 'stroke-linecap': 'round',
+      opacity: (.45 + rnd() * .4).toFixed(2)
+    }));
+  }
+  fg.appendChild(grass);
+
+  /* 花朵 */
+  const petals = ['#F9BFDD', '#FFD8EC', '#FFC8E4', '#CBB9F9', '#BFDCFB', '#FFFDFF', '#FFE7B0', '#F4D3F1'];
+  function flower(x, y, k, c){
+    const g = mk('g', {
+      transform: `translate(${x.toFixed(1)} ${y.toFixed(1)}) scale(${k.toFixed(2)}) rotate(${((rnd() - .5) * 14).toFixed(1)})`
+    });
+    const h = (248 - y) / k;
+    g.appendChild(mk('path', {
+      d: `M0 0 C ${(-2 + (rnd() - .5) * 7).toFixed(1)} ${(h * .38).toFixed(1)} ${(2 + (rnd() - .5) * 6).toFixed(1)} ${(h * .72).toFixed(1)} 0 ${h.toFixed(1)}`,
+      fill: 'none', stroke: '#A5CEAD', 'stroke-width': '2.1', 'stroke-linecap': 'round', opacity: '.9'
+    }));
+    g.appendChild(mk('path', {
+      d: `M0 ${(h * .52).toFixed(1)} C -9 ${(h * .48).toFixed(1)} -14 ${(h * .4).toFixed(1)} -15 ${(h * .33).toFixed(1)} C -9 ${(h * .34).toFixed(1)} -3 ${(h * .41).toFixed(1)} 0 ${(h * .5).toFixed(1)} Z`,
+      fill: '#B4DABD', opacity: '.85'
+    }));
+    const n = 5 + Math.floor(rnd() * 2);
+    for(let p = 0; p < n; p++){
+      g.appendChild(mk('ellipse', {
+        cx: '0', cy: '-6.2', rx: (3 + rnd() * .9).toFixed(1), ry: (5.6 + rnd() * 1.4).toFixed(1),
+        fill: c, opacity: '.94', transform: `rotate(${(p * 360 / n + rnd() * 9).toFixed(1)})`
+      }));
+    }
+    g.appendChild(mk('circle', { cx: '0', cy: '0', r: (2.6 + rnd() * .7).toFixed(1), fill: '#FFE39B' }));
+    return g;
+  }
+  for(let i = 0; i < 58; i++){
+    fg.appendChild(flower(rnd() * 1500 - 30, 150 + rnd() * 92, .5 + rnd() * .7, pick(petals)));
+  }
+  for(let i = 0; i < 22; i++){
+    fg.appendChild(flower(rnd() * 1520 - 40, 214 + rnd() * 30, .95 + rnd() * .65, pick(petals)));
+  }
+
+  /* 遠坡上的小碎花 */
+  const sp = document.getElementById('coverSprinkles');
+  if(sp){
+    for(let i = 0; i < 46; i++){
+      sp.appendChild(mk('circle', {
+        cx: (rnd() * 1480 - 20).toFixed(1), cy: (700 + rnd() * 82).toFixed(1),
+        r: (1.6 + rnd() * 2.6).toFixed(1), fill: pick(petals), opacity: (.45 + rnd() * .4).toFixed(2)
+      }));
+    }
+  }
+
+  /* 螢火蟲 */
+  const box = document.getElementById('coverFlies');
+  if(box){
+    for(let i = 0; i < 16; i++){
+      const d = document.createElement('span');
+      d.className = 'firefly';
+      d.style.left = (6 + Math.random() * 88).toFixed(1) + '%';
+      d.style.top = (14 + Math.random() * 56).toFixed(1) + '%';
+      const sz = 4 + Math.random() * 4;
+      d.style.width = sz.toFixed(1) + 'px';
+      d.style.height = sz.toFixed(1) + 'px';
+      d.style.animationDelay = (-Math.random() * 6).toFixed(1) + 's,' + (-Math.random() * 12).toFixed(1) + 's';
+      d.style.animationDuration = (3.6 + Math.random() * 3).toFixed(1) + 's,' + (11 + Math.random() * 8).toFixed(1) + 's';
+      box.appendChild(d);
+    }
+  }
+})();
+
+/* =========================================================
+   封面 · 頭部跟隨滑鼠 + 進入 / 返回
+========================================================= */
+(function coverLogic(){
+  const cover = document.getElementById('cover');
+  if(!cover) return;
+  const app = document.querySelector('.app');
+  const slot = document.getElementById('uniSlot');
+  const u3 = document.getElementById('uni3d');
+  const head = document.getElementById('uniHead');
+  const door = document.getElementById('doorSlot');
+  const back = document.getElementById('backCover');
+
+  document.body.classList.add('cover-open');
+  if(app) app.inert = true;
+
+  let tgx = 0, tgy = 0, cx = 0, cy = 0, raf = 0;
+  function frame(){
+    cx += (tgx - cx) * .12;
+    cy += (tgy - cy) * .12;
+    u3.style.setProperty('--ry', (cx * 6.5).toFixed(2) + 'deg');
+    u3.style.setProperty('--rx', (-cy * 4.5).toFixed(2) + 'deg');
+    head.style.setProperty('--hx', (cx * 8).toFixed(2) + 'px');
+    head.style.setProperty('--hy', (cy * 5).toFixed(2) + 'px');
+    head.style.setProperty('--hr', (cx * 2.6).toFixed(2) + 'deg');
+    if(Math.abs(tgx - cx) > .0015 || Math.abs(tgy - cy) > .0015){
+      raf = requestAnimationFrame(frame);
+    }else{
+      raf = 0;
+    }
+  }
+  function kick(){ if(!raf) raf = requestAnimationFrame(frame); }
+
+  cover.addEventListener('pointermove', function(e){
+    if(!slot) return;
+    const r = slot.getBoundingClientRect();
+    tgx = Math.max(-1, Math.min(1, (e.clientX - (r.left + r.width * .5)) / (r.width * .95)));
+    tgy = Math.max(-1, Math.min(1, (e.clientY - (r.top + r.height * .4)) / (r.height * .85)));
+    kick();
+  }, { passive: true });
+  cover.addEventListener('pointerleave', function(){ tgx = 0; tgy = 0; kick(); });
+
+  let leaving = false;
+  function enter(){
+    if(leaving) return;
+    leaving = true;
+    try{ chime(); }catch(err){}
+    cover.classList.add('enter');
+    setTimeout(function(){ cover.classList.add('leave'); }, 240);
+    setTimeout(function(){
+      cover.style.display = 'none';
+      cover.classList.remove('enter', 'leave');
+      document.body.classList.remove('cover-open');
+      if(app) app.inert = false;
+      window.scrollTo(0, 0);
+      leaving = false;
+    }, 1260);
+  }
+  if(door) door.addEventListener('click', enter);
+
+  if(back) back.addEventListener('click', function(e){
+    e.preventDefault();
+    cover.style.display = 'flex';
+    void cover.offsetWidth;
+    cover.classList.remove('leave', 'enter');
+    document.body.classList.add('cover-open');
+    if(app) app.inert = true;
+    tgx = 0; tgy = 0; cx = 0; cy = 0;
+    window.scrollTo(0, 0);
+    try{ chime(); }catch(err){}
+  });
+
+})();
 </script>
 </body>
 </html>
