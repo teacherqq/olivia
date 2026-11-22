@@ -14,25 +14,26 @@
   .logo small{color:#94a3b8;font-weight:700;font-size:.85rem;display:block;line-height:1.1}
   #dictBtn{margin-left:auto;border:none;cursor:pointer;font-family:inherit;font-weight:900;font-size:1.2rem;color:#fff;background:linear-gradient(135deg,#ec4899,#f43f5e);border-radius:999px;padding:10px 22px;box-shadow:0 6px 16px rgba(236,72,153,.4);transition:.15s;white-space:nowrap}
   #dictBtn:hover{transform:scale(1.05)}
-  main{max-width:1080px;margin:0 auto;padding:22px 18px 60px}
-  .sec{background:#fff;border:3px solid #fbcfe8;border-radius:26px;padding:20px 22px;margin-bottom:26px;box-shadow:0 10px 30px rgba(236,72,153,.08)}
+  main{max-width:none;margin:0;padding:20px clamp(10px,1.4vw,26px) 60px}
+  .sec{background:#fff;border:3px solid #fbcfe8;border-radius:28px;padding:clamp(16px,1.8vw,28px) clamp(14px,1.8vw,28px);margin-bottom:26px;box-shadow:0 10px 30px rgba(236,72,153,.08)}
   .sec-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:6px}
   .sec-head h2{font-size:1.6rem;font-weight:900;color:#be185d;word-break:keep-all}
   .sec-head .en{font-size:.95rem;color:#94a3b8;font-weight:700}
   .sec-desc{font-size:1.05rem;color:#64748b;margin-bottom:14px}
-  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:16px}
-  .wcard{position:relative;background:linear-gradient(160deg,#fff,#fdf2f8);border:3px solid #f9a8d4;border-radius:20px;padding:14px 10px 12px;text-align:center;transition:.15s}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:clamp(12px,1.4vw,20px)}
+  .wcard{position:relative;background:linear-gradient(160deg,#fff,#fdf2f8);border:3px solid #f9a8d4;border-radius:22px;padding:18px 12px 14px;text-align:center;transition:.15s}
   .wcard:hover{transform:translateY(-3px);box-shadow:0 8px 18px rgba(236,72,153,.15)}
   .wcard .num{position:absolute;top:-10px;left:-8px;background:#ec4899;color:#fff;font-weight:900;font-size:.85rem;border-radius:999px;padding:2px 9px;box-shadow:0 3px 8px rgba(236,72,153,.4)}
-  .wcard .py{font-size:1.75rem;font-weight:900;color:#7c3aed;letter-spacing:.5px;min-height:2.2rem;display:flex;align-items:center;justify-content:center;line-height:1.15}
-  .wcard .word{font-size:2.1rem;font-weight:900;color:#0f172a;line-height:1.2}
-  .wcard .ans{margin-top:4px;min-height:2.6rem;display:flex;align-items:center;justify-content:center}
+  .wcard .py{font-size:clamp(1.9rem,2.4vw,2.55rem);font-weight:900;color:#7c3aed;letter-spacing:.5px;min-height:2.5rem;display:flex;align-items:center;justify-content:center;line-height:1.15;cursor:pointer}
+  .wcard .py:hover,.wcard .word:hover{text-shadow:0 0 14px rgba(236,72,153,.45)}
+  .wcard .word{font-size:clamp(2.3rem,3vw,3.2rem);font-weight:900;color:#0f172a;line-height:1.2;cursor:pointer}
+  .wcard .ans{margin-top:6px;min-height:3rem;display:flex;align-items:center;justify-content:center;cursor:pointer}
   .wcard .ans .hidden-ans{color:#cbd5e1;font-weight:900;letter-spacing:6px}
-  .wcard .ans .show-ans{font-size:2rem;font-weight:900;color:#0f172a;animation:pop .35s}
-  .wcard .ans .show-py{font-size:1.45rem;font-weight:900;color:#7c3aed;animation:pop .35s}
+  .wcard .ans .show-ans{font-size:clamp(2.4rem,3.2vw,3.3rem);font-weight:900;color:#0f172a;animation:pop .35s;letter-spacing:2px}
+  .wcard .ans .show-py{font-size:clamp(1.35rem,1.8vw,1.8rem);font-weight:900;color:#7c3aed;animation:pop .35s}
   @keyframes pop{0%{transform:scale(.6)}60%{transform:scale(1.15)}100%{transform:scale(1)}}
-  .wcard .btns{display:flex;gap:6px;justify-content:center;margin-top:8px}
-  .wcard .btns button{border:none;cursor:pointer;font-family:inherit;font-size:1.2rem;border-radius:12px;padding:6px 10px;background:#fff;border:2px solid #fbcfe8;transition:.12s}
+  .wcard .btns{display:flex;gap:8px;justify-content:center;margin-top:10px}
+  .wcard .btns button{border:none;cursor:pointer;font-family:inherit;font-size:clamp(1.2rem,1.6vw,1.45rem);border-radius:13px;padding:8px 12px;background:#fff;border:2px solid #fbcfe8;transition:.12s}
   .wcard .btns button:hover{background:#fdf2f8;transform:scale(1.1)}
   .wcard.done{border-color:#86efac;background:linear-gradient(160deg,#fff,#f0fdf4)}
   .wcard.done .okmark{background:#dcfce7 !important;border-color:#4ade80 !important}
@@ -82,8 +83,38 @@
   .st-nav button{border:2px solid #fbcfe8;background:#fff;cursor:pointer;font-family:inherit;font-weight:900;font-size:1.6rem;border-radius:14px;padding:8px 18px;color:#be185d}
   .st-nav button:disabled{opacity:.35;cursor:default}
   #stReplay{border:none;cursor:pointer;font-family:inherit;font-weight:900;font-size:1.2rem;color:#fff;background:linear-gradient(135deg,#8b5cf6,#6366f1);border-radius:999px;padding:10px 22px}
+  /* 大詞卡（點字放大） */
+  .wc-overlay{background:rgba(30,41,59,.45);backdrop-filter:blur(7px);align-items:center;justify-content:center;padding:14px}
+  .wc-card{position:relative;width:min(94vw,920px);max-height:92vh;overflow:auto;background:linear-gradient(160deg,#fff,#fdf2f8 55%,#f0f9ff);border:4px solid #f9a8d4;border-radius:34px;box-shadow:0 30px 80px rgba(190,24,93,.35);padding:clamp(24px,3vw,42px) clamp(16px,3vw,38px) clamp(20px,2.6vw,34px);text-align:center;animation:wcIn .22s ease-out}
+  @keyframes wcIn{0%{transform:scale(.88);opacity:0}100%{transform:scale(1);opacity:1}}
+  .wc-close{position:absolute;top:10px;right:12px;border:none;cursor:pointer;font-family:inherit;font-weight:900;font-size:1.2rem;color:#be185d;background:#fff;border:2px solid #fbcfe8;border-radius:999px;width:46px;height:46px;line-height:1}
+  .wc-top{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:8px;padding:0 48px}
+  .wc-badge{background:#ec4899;color:#fff;font-weight:900;border-radius:999px;padding:4px 16px;font-size:.95rem}
+  .wc-num{color:#94a3b8;font-weight:900;font-size:.95rem}
+  .wc-main{font-weight:900;color:#7c3aed;line-height:1.12;font-size:clamp(1.9rem,4.6vw,3.2rem);word-break:break-word;padding:6px 0}
+  .wc-main.word{color:#0f172a;font-size:clamp(3.2rem,11vw,7.6rem);letter-spacing:2px}
+  .wc-ans{min-height:clamp(3rem,7vw,4.6rem);display:flex;align-items:center;justify-content:center;margin:6px 0 clamp(14px,2vw,22px)}
+  .wc-ans .hidden-ans{color:#cbd5e1;font-weight:900;letter-spacing:12px;font-size:clamp(2.6rem,7vw,5rem)}
+  .wc-ans .show-ans{font-size:clamp(3.4rem,10vw,7rem);font-weight:900;color:#0f172a;letter-spacing:4px;animation:pop .35s}
+  .wc-ans .show-py{font-size:clamp(1.5rem,4vw,2.6rem);font-weight:900;color:#7c3aed;animation:pop .35s}
+  .wc-btns{display:flex;gap:clamp(8px,1.4vw,14px);justify-content:center;flex-wrap:wrap}
+  .wc-btns button{border:3px solid #fbcfe8;background:#fff;color:#be185d;font-family:inherit;font-weight:900;font-size:clamp(1.1rem,1.7vw,1.45rem);border-radius:999px;padding:11px 20px;cursor:pointer;transition:.12s}
+  .wc-btns button:hover{transform:translateY(-2px);background:#fdf2f8}
+  .wc-btns button.ok{background:#dcfce7;border-color:#4ade80;color:#166534}
   footer{text-align:center;color:#94a3b8;font-weight:700;font-size:.95rem;padding:10px}
-  @media (max-width:640px){ .wcard .py{font-size:1.45rem} #dtBig{font-size:3.6rem} }
+  @media (max-width:640px){
+    .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+    .wcard{padding:14px 6px 10px;border-radius:18px}
+    .wcard .py{font-size:1.3rem;min-height:1.9rem}
+    .wcard .word{font-size:1.75rem}
+    .wcard .ans{min-height:2.2rem}
+    .wcard .ans .show-ans{font-size:1.95rem}
+    .wcard .ans .show-py{font-size:1.1rem}
+    .wcard .btns{gap:4px;margin-top:8px}
+    .wcard .btns button{font-size:1rem;padding:5px 7px;border-radius:10px}
+    .wc-card{padding:22px 14px 20px}
+    #dtBig{font-size:3.6rem}
+  }
 </style>
 </head>
 <body>
@@ -130,6 +161,22 @@
       <button id="dtPlay">🔊 再聽一次</button>
       <button id="dtShow">👁 顯示答案</button>
       <button id="dtNext">⏭ 下一個</button>
+    </div>
+  </div>
+</div>
+
+<!-- 大詞卡 overlay（點字放大） -->
+<div class="overlay wc-overlay" id="wcOverlay">
+  <div class="wc-card" role="dialog" aria-modal="true" aria-label="大詞卡">
+    <button class="wc-close" id="wcClose" title="關閉">✕</button>
+    <div class="wc-top"><span class="wc-badge" id="wcBadge"></span><span class="wc-num" id="wcNum"></span></div>
+    <div class="wc-main" id="wcMain"></div>
+    <div class="wc-ans" id="wcAns"></div>
+    <div class="wc-btns">
+      <button id="wcSpk">🔊 聽</button>
+      <button id="wcStroke">✍ 筆順</button>
+      <button id="wcReveal">👁 顯示</button>
+      <button id="wcOk">✓ 寫對了</button>
     </div>
   </div>
 </div>
@@ -265,6 +312,10 @@ document.querySelectorAll(".wcard").forEach(card=>{
     if(PROG.ok[k]) speak("答對了，好棒！");
   };
   card.querySelector(".stroke").onclick = ()=>openStroke(cardWord(card));
+  [".py",".word",".ans"].forEach(sel=>{
+    const el = card.querySelector(sel);
+    if(el) el.onclick = ()=>openWordCard(k);
+  });
   if(PROG.ok[k]){ card.classList.add("done"); card.querySelector(".okmark").textContent = "🌟"; }
 });
 
@@ -338,9 +389,55 @@ document.getElementById("stReplay").onclick = ()=>{ if(ST.writer){ ST.writer.hid
 document.getElementById("stHost").onclick = ()=>{ if(ST.writer){ ST.writer.hideCharacter(); ST.writer.animateCharacter({strokeAnimationSpeed:.8, delayBetweenStrokes:350}); } };
 document.addEventListener("keydown", e=>{
   if(!stOverlay.classList.contains("open")) return;
-  if(e.key==="Escape") closeStroke();
+  if(e.key==="Escape"){ e.stopImmediatePropagation(); closeStroke(); }
   if(e.key==="ArrowLeft") document.getElementById("stPrev").click();
   if(e.key==="ArrowRight") document.getElementById("stNext").click();
+});
+
+/* ==================== 大詞卡（點字放大）==================== */
+const wcOverlay = document.getElementById("wcOverlay");
+let WC = { k:null };
+function wcCardEl(){ return WC.k ? document.querySelector(`.wcard[data-k="${WC.k}"]`) : null; }
+function wcRender(){
+  const card = wcCardEl(); if(!card) return;
+  const k = WC.k, isA = k[0]==="A";
+  const item = isA ? GROUP_A[+k.slice(1)] : GROUP_B[+k.slice(1)];
+  const shown = !!card.querySelector(".ans .show-ans, .ans .show-py");
+  document.getElementById("wcBadge").textContent = isA ? "A組 · 看拼音寫詞語" : "B組 · 看詞語寫拼音";
+  document.getElementById("wcNum").textContent = `第 ${+k.slice(1)+1} 個`;
+  const main = document.getElementById("wcMain");
+  main.className = "wc-main" + (isA ? "" : " word");
+  main.textContent = item[0];
+  document.getElementById("wcAns").innerHTML = shown
+    ? (isA ? `<span class="show-ans">${item[1]}</span>` : `<span class="show-py">${item[1]}</span>`)
+    : `<span class="hidden-ans">？？？</span>`;
+  document.getElementById("wcReveal").textContent = shown ? "🙈 隱藏" : "👁 顯示";
+  const okBtn = document.getElementById("wcOk"), done = !!PROG.ok[k];
+  okBtn.textContent = done ? "🌟 已收錄" : "✓ 寫對了";
+  okBtn.classList.toggle("ok", done);
+}
+function openWordCard(k){
+  WC.k = k;
+  wcOverlay.classList.add("open");
+  document.body.style.overflow = "hidden";
+  wcRender();
+  speak(cardWord(document.querySelector(`.wcard[data-k="${k}"]`)));
+}
+function closeWordCard(){
+  wcOverlay.classList.remove("open");
+  document.body.style.overflow = "";
+  WC.k = null;
+}
+document.getElementById("wcClose").onclick = closeWordCard;
+wcOverlay.addEventListener("click", e=>{ if(e.target === wcOverlay) closeWordCard(); });
+document.getElementById("wcSpk").onclick = ()=>{ const c = wcCardEl(); if(c) speak(cardWord(c)); };
+document.getElementById("wcStroke").onclick = ()=>{ const c = wcCardEl(); if(c) openStroke(cardWord(c)); };
+document.getElementById("wcReveal").onclick = ()=>{ const c = wcCardEl(); if(c){ c.querySelector(".reveal").click(); wcRender(); } };
+document.getElementById("wcOk").onclick = ()=>{ const c = wcCardEl(); if(c){ c.querySelector(".okmark").click(); wcRender(); } };
+document.addEventListener("keydown", e=>{
+  if(!wcOverlay.classList.contains("open")) return;
+  if(stOverlay.classList.contains("open")) return;
+  if(e.key === "Escape") closeWordCard();
 });
 
 /* ==================== 聽寫模式 ==================== */
