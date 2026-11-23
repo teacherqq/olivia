@@ -21,6 +21,49 @@
   @media print{ @page{size:A4 landscape;margin:5mm} body{background:#fff}.app{width:100%;max-width:none;padding:0}.hero{padding:7px 12px;border-width:1px;border-radius:14px}.hero:after{font-size:16px;right:12px;top:8px}.eyebrow{font-size:8px}.hero h1{font-size:23px;margin:2px 0}.hero p{font-size:9px}.toolbar,.hint,.note{display:none}.legend{margin:4px 0;font-size:8px;gap:7px}.dot{width:8px;height:8px}.scroll{overflow:visible;padding:0}.schedule{min-width:0;width:100%;grid-template-columns:48px repeat(7,minmax(0,1fr));gap:2px}.corner,.day{border-radius:7px}.day{font-size:12px;padding:5px 2px}.day small{font-size:9px;margin-top:0}.day em{font-size:12px}.times,.col{min-height:650px}.time-label{font-size:8px}.block{left:2px;right:2px;border-width:1px;border-radius:8px;padding:2px 3px}.block strong{font-size:9px}.block span{font-size:8px}.block-icon{width:28px;height:28px}.block-emoji{font-size:20px}.cca-only .block-icon{width:32px;height:32px}.cca-only .block-emoji{font-size:24px}.cca-only .time{font-size:8px}.print-only{font-size:8px;margin-top:3px}}
   @media(max-width:800px){.app{padding:12px}.hero{padding:17px}.hero:after{font-size:20px;right:8px}.schedule{grid-template-columns:65px repeat(7,125px)}.times,.col{min-height:650px}.toolbar .btn{padding:9px 10px;font-size:12px}}
 </style>
+
+<style id="oliviaHomeStyle">
+/* ===== 回到學習樂園 · 統一導覽（勿刪） ===== */
+.oliviaHome.oliviaHome{
+  position:fixed;left:18px;bottom:18px;z-index:120;
+  display:inline-flex;align-items:center;gap:9px;
+  box-sizing:border-box;padding:7px 15px 7px 8px;
+  border:2px solid rgba(190,152,226,.6);border-radius:999px;
+  background:rgba(255,255,255,.94)!important;
+  color:#6B4E96!important;text-decoration:none!important;
+  font-family:"PingFang TC","Microsoft JhengHei","Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  box-shadow:0 8px 22px rgba(122,92,168,.2),0 2px 0 rgba(255,255,255,.95) inset;
+  -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+  transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease;
+  -webkit-tap-highlight-color:transparent;
+}
+.oliviaHome.oliviaHome:hover,.oliviaHome.oliviaHome:focus-visible{
+  transform:translateY(-3px) scale(1.045);
+  border-color:rgba(168,120,214,.9);
+  box-shadow:0 13px 28px rgba(122,92,168,.3),0 2px 0 rgba(255,255,255,.95) inset;
+  outline:none;
+}
+.oliviaHome.oliviaHome:active{transform:translateY(-1px) scale(1.01);}
+.oliviaHome__ico{
+  flex:0 0 auto;width:32px;height:32px;border-radius:50%;
+  display:grid;place-items:center;
+  background:linear-gradient(145deg,#FBE0F3 0%,#E3D6FB 55%,#D8ECFB 100%);
+  box-shadow:0 2px 7px rgba(150,110,205,.25);
+}
+.oliviaHome__ico svg{display:block;width:19px;height:19px;fill:none;stroke:#7A55AC;
+  stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.oliviaHome__txt{display:flex;flex-direction:column;line-height:1.18;white-space:nowrap;}
+.oliviaHome__txt b{font-size:13px;font-weight:800;letter-spacing:.05em;color:#5F4289;}
+.oliviaHome__txt i{font-style:normal;font-size:10px;letter-spacing:.02em;color:#9A83B8;}
+@media (max-width:640px){
+  .oliviaHome.oliviaHome{left:11px;bottom:11px;padding:6px 11px 6px 6px;gap:7px;}
+  .oliviaHome__ico{width:28px;height:28px;}
+  .oliviaHome__ico svg{width:17px;height:17px;}
+  .oliviaHome__txt b{font-size:12px;}
+  .oliviaHome__txt i{display:none;}
+}
+@media print{.oliviaHome.oliviaHome{display:none!important;}}
+</style>
 </head>
 <body>
 <main class="app">
@@ -119,4 +162,12 @@ form.addEventListener('submit',e=>{e.preventDefault();const item={id:editId||'b'
 function downloadPNG(){const W=1800,H=1120,c=document.createElement('canvas');c.width=W;c.height=H;const x=c.getContext('2d');x.fillStyle='#fffdf7';x.fillRect(0,0,W,H);x.fillStyle='#264c67';x.font='bold 46px KaiTi';x.fillText('Olivia 的一週時間表 🌈',60,70);x.fillStyle='#6e7d8e';x.font='22px KaiTi';x.fillText('拖動卡片調整｜學校 7:45–15:00｜晚上 8:30 開始準備睡覺',62,108);const left=95,top=145,gridW=1650,dayW=gridW/7,rowH=60;dayNames.forEach((d,i)=>{x.fillStyle='#dff4ff';x.fillRect(left+i*dayW,top,dayW-6,48);x.fillStyle='#355267';x.font='bold 22px KaiTi';x.fillText(d,left+i*dayW+dayW/2-35,top+31)});for(let h=8;h<=20;h++){let y=top+60+(h-8)*rowH;x.strokeStyle='#d8e3e8';x.beginPath();x.moveTo(left,y);x.lineTo(left+gridW,y);x.stroke();x.fillStyle='#8796a0';x.font='16px KaiTi';x.fillText((h>12?h-12:h)+':00',20,y+5)}const colors={school:'#c9edff',cca:'#ffd6ad',lesson:'#e4dcff',homework:'#fff0ad',sleep:'#cfead8',life:'#ffd8e1'};blocks.forEach(b=>{let s=mins(b.start),e=mins(b.end);if(e<=s)e+=1440;if(e<7*60+45||s>21*60)return;let y=top+60+(s-8*60)*rowH/60;let h=Math.max(30,(e-s)*rowH/60);let xx=left+b.day*dayW+7;x.fillStyle=colors[b.type]||'#eee';x.beginPath();x.roundRect(xx,y,dayW-20,h,12);x.fill();x.fillStyle='#27364b';x.font='bold 16px KaiTi';x.fillText(b.title.slice(0,18),xx+10,y+23);x.font='13px KaiTi';x.fillText(b.start+'–'+b.end,xx+10,y+43)});x.fillStyle='#78909c';x.font='16px KaiTi';x.fillText('可在網頁中點擊、拖動或新增活動後再下載',60,H-30);const a=document.createElement('a');a.download='Olivia一週時間表.png';a.href=c.toDataURL('image/png');a.click()}
 pngBtn.onclick=downloadPNG;populatePresets();render();
 </script>
+
+<a class="oliviaHome" href="../index.html?park=1"
+   title="回到 Olivia 學習樂園首頁" aria-label="回到 Olivia 學習樂園首頁">
+  <span class="oliviaHome__ico" aria-hidden="true">
+    <svg viewBox="0 0 24 24"><path d="M3 10.8 12 3.8l9 7"/><path d="M5.5 9.6V20h13V9.6"/><path d="M10 20v-5.2h4V20"/></svg>
+  </span>
+  <span class="oliviaHome__txt"><b>回到樂園</b><i>Olivia 學習樂園首頁</i></span>
+</a>
 </body></html>
