@@ -330,6 +330,49 @@
     font-size:14px;font-weight:700;}
   .resume-note .en{display:inline;font-size:10.5px;color:#a99cc0;font-weight:600;}
 </style>
+
+<style id="oliviaHomeStyle">
+/* ===== 回到學習樂園 · 統一導覽（勿刪） ===== */
+.oliviaHome.oliviaHome{
+  position:fixed;left:18px;bottom:18px;z-index:120;
+  display:inline-flex;align-items:center;gap:9px;
+  box-sizing:border-box;padding:7px 15px 7px 8px;
+  border:2px solid rgba(190,152,226,.6);border-radius:999px;
+  background:rgba(255,255,255,.94)!important;
+  color:#6B4E96!important;text-decoration:none!important;
+  font-family:"PingFang TC","Microsoft JhengHei","Noto Sans TC",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  box-shadow:0 8px 22px rgba(122,92,168,.2),0 2px 0 rgba(255,255,255,.95) inset;
+  -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+  transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease;
+  -webkit-tap-highlight-color:transparent;
+}
+.oliviaHome.oliviaHome:hover,.oliviaHome.oliviaHome:focus-visible{
+  transform:translateY(-3px) scale(1.045);
+  border-color:rgba(168,120,214,.9);
+  box-shadow:0 13px 28px rgba(122,92,168,.3),0 2px 0 rgba(255,255,255,.95) inset;
+  outline:none;
+}
+.oliviaHome.oliviaHome:active{transform:translateY(-1px) scale(1.01);}
+.oliviaHome__ico{
+  flex:0 0 auto;width:32px;height:32px;border-radius:50%;
+  display:grid;place-items:center;
+  background:linear-gradient(145deg,#FBE0F3 0%,#E3D6FB 55%,#D8ECFB 100%);
+  box-shadow:0 2px 7px rgba(150,110,205,.25);
+}
+.oliviaHome__ico svg{display:block;width:19px;height:19px;fill:none;stroke:#7A55AC;
+  stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.oliviaHome__txt{display:flex;flex-direction:column;line-height:1.18;white-space:nowrap;}
+.oliviaHome__txt b{font-size:13px;font-weight:800;letter-spacing:.05em;color:#5F4289;}
+.oliviaHome__txt i{font-style:normal;font-size:10px;letter-spacing:.02em;color:#9A83B8;}
+@media (max-width:640px){
+  .oliviaHome.oliviaHome{left:11px;bottom:11px;padding:6px 11px 6px 6px;gap:7px;}
+  .oliviaHome__ico{width:28px;height:28px;}
+  .oliviaHome__ico svg{width:17px;height:17px;}
+  .oliviaHome__txt b{font-size:12px;}
+  .oliviaHome__txt i{display:none;}
+}
+@media print{.oliviaHome.oliviaHome{display:none!important;}}
+</style>
 </head>
 <body>
 <div class="float-bg" id="floatBg"></div>
@@ -2241,5 +2284,13 @@ renderHome();
 renderMultTable();
 renderDivTable();
 </script>
+
+<a class="oliviaHome" href="../index.html?park=1"
+   title="回到 Olivia 學習樂園首頁" aria-label="回到 Olivia 學習樂園首頁">
+  <span class="oliviaHome__ico" aria-hidden="true">
+    <svg viewBox="0 0 24 24"><path d="M3 10.8 12 3.8l9 7"/><path d="M5.5 9.6V20h13V9.6"/><path d="M10 20v-5.2h4V20"/></svg>
+  </span>
+  <span class="oliviaHome__txt"><b>回到樂園</b><i>Olivia 學習樂園首頁</i></span>
+</a>
 </body>
 </html>
