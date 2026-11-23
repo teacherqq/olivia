@@ -708,7 +708,7 @@
         </div>
       </div>
       <div class="act-desc">
-        十七個小遊戲，練習工作記憶與自我控制：野餐清單、數字廣度、格子記憶、Simon Says、規則切換、Snap！中英雙語，可聽讀題目，過關賺星星換貼紙。
+        十七個小遊戲，練習工作記憶與自我控制：野餐清單、數字廣度、格子記憶、Simon Says、規則切換、Snap！中英雙語，可聽讀題目，過關賺星星，收集 30 款水彩貼紙。
         <span class="en">Seventeen mini-games for working memory and self-control — picnic list, digit span, glowing grids, Simon Says, rule switching and Snap! Bilingual, with spoken prompts and star rewards.</span>
       </div>
       <div class="tags">
@@ -1228,8 +1228,20 @@ document.querySelectorAll('.act').forEach(function(el, i){
   const door = document.getElementById('doorSlot');
   const back = document.getElementById('backCover');
 
-  document.body.classList.add('cover-open');
-  if(app) app.inert = true;
+  /* 從子頁面點「回到樂園」進來時（?park=1）直接顯示樂園卡片頁，不重播封面 */
+  var directPark = /[?&]park=1(?:&|$)/.test(location.search);
+  function showParkNow(){
+    cover.style.display = 'none';
+    cover.classList.remove('enter', 'leave');
+    document.body.classList.remove('cover-open');
+    if(app) app.inert = false;
+  }
+  if(directPark){
+    showParkNow();
+  }else{
+    document.body.classList.add('cover-open');
+    if(app) app.inert = true;
+  }
 
   let tgx = 0, tgy = 0, cx = 0, cy = 0, raf = 0;
   function frame(){
@@ -1277,6 +1289,10 @@ document.querySelectorAll('.act').forEach(function(el, i){
 
   if(back) back.addEventListener('click', function(e){
     e.preventDefault();
+    if(directPark){
+      try{ history.replaceState(null, '', location.pathname); }catch(err){}
+      directPark = false;
+    }
     cover.style.display = 'flex';
     void cover.offsetWidth;
     cover.classList.remove('leave', 'enter');
